@@ -1,0 +1,24 @@
+import App from '@/App.vue'
+import { createApp } from 'vue'
+import { createVuetify } from 'vuetify'
+import { createPinia } from 'pinia';
+import { createPersistedState } from 'pinia-plugin-persistedstate';
+import { router } from '@browser-module/router'
+
+const pinia = createPinia();
+pinia.use(createPersistedState());
+
+const vuetify = createVuetify({
+    theme: {
+      defaultTheme: 'dark',
+    },
+  }
+);
+
+const app = createApp(App)
+
+app.use(vuetify);
+app.use(pinia);
+app.use(router);
+
+app.mount('#app')
