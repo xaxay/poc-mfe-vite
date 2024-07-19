@@ -13,11 +13,13 @@ import { fileURLToPath, URL } from 'node:url'
 
 import { vueBuildInjectedCss } from './vite-plugin-vue-build-injected-css';
 
+// import rewriteAll from 'vite-plugin-rewrite-all';
+
 // https://vitejs.dev/config/
 const config = defineConfig((env: ConfigEnv) => { 
 
   return {
-    base: './',
+    base: '/', // TODO: keep actual the baseUrl
 
     plugins: [
       ImportMapsPlugin(),
@@ -66,8 +68,9 @@ const config = defineConfig((env: ConfigEnv) => {
 
     server: {
       port: 3000,
+      historyApiFallback: true
     },
-    
+
     build: {
       // minify: false,
 

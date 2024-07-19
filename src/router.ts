@@ -10,10 +10,10 @@ const routes: RouteRecordRaw[] = routeEntries.map(([path, data]) => ({
     meta: { title: data.title }
 }));
 
-const baseUrl: string = routesConfig.baseUrl || '/';
-const defaultRoutePath: string | undefined = routesConfig.defaultPath;
+export const baseUrl: string = routesConfig.baseUrl || '/';
+export const defaultRoutePath: string | undefined = routesConfig.defaultPath;
 if (defaultRoutePath) {
-    routes.push({ path: '/:pathMatch(.*)*', redirect: defaultRoutePath });
+    routes.push({ path: '/:pathMatch(.*)*', redirect: defaultRoutePath || '/' });
 }
 
 console.log('baseUrl', baseUrl, 'top level routes:', routes);
@@ -23,7 +23,14 @@ export const router = createRouter({
     routes
 });
 
+
 router.beforeEach((to, from, next) => {
-    console.log('[router]', to?.path, '<=', from?.path);
-    next();
+    const knownRoute = routes.some(route => route.path === to.path);
+    if (!knownRoute) {
+        console.log('[router] unknown path:', to.path, 'redirecting to default path:', defaultRoutePath || '/');
+        next(defaultRoutePath || '/');
+    } else {
+        console.log('[router]', to?.path, '<=', from?.path);
+        next();
+    }
 });

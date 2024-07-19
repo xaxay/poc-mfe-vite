@@ -231,7 +231,7 @@ export function ImportMapsPlugin(config: ImportMapsConfig = {
         const name: string = file.name;
         if (inputKeysSet.has(name) && importMap.imports[name]) {
           console.log(chalk.blue.bold('[map-import]'), chalk.magenta(name), chalk.greenBright(fileName), chalk.cyanBright(importMap.imports[name]));
-          importMap.imports[name] = `./${fileName}`;
+          importMap.imports[name] = `/${fileName}`;
         } 
       });
 
