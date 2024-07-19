@@ -17,8 +17,12 @@ if (defaultRoutePath) {
 
 console.log('top level routes:', routes);
 
+const currentPath = window.location.pathname;
+let BASE_URL = currentPath.substring(0, currentPath.length-1);
+console.log('BASE_URL', BASE_URL);
+
 export const router = createRouter({
-    history: createWebHistory('/'),
+    history: createWebHistory(BASE_URL),
     routes
 });
 
