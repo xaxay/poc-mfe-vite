@@ -16,6 +16,20 @@ It proves that it works and demonstrate how all these parts are initialized and 
 
 For simplicity all modules are exposed from one repo!
 
+## Installation
+
+`yarn`
+
+## Starting in development (serve) mode with enabled HMR
+
+`yarn dev`
+
+## Starting in production (build) mode
+
+`yarn build`
+`yarn preview`
+
+
 ## References
 - [POC Distributed SPA : Phase-1](https://github.com/xaxay/poc-mfe-pure) Pure implementation without any bundler.
 - [POC Distributed SPA : Phase 2](https://github.com/xaxay/poc-mfe-vite/) It is full-fledged development version.
