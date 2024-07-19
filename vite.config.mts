@@ -13,8 +13,6 @@ import { fileURLToPath, URL } from 'node:url'
 
 import { vueBuildInjectedCss } from './vite-plugin-vue-build-injected-css';
 
-import { string } from "rollup-plugin-string";
-
 // https://vitejs.dev/config/
 const config = defineConfig((env: ConfigEnv) => { 
 
