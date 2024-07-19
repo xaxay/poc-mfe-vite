@@ -2,7 +2,7 @@
 import { existsSync, readFileSync, rmSync, writeFileSync } from 'fs';
 import { Plugin } from 'vite';
 import { join } from 'path';
-import { NormalizedOutputOptions, OutputBundle, OutputChunk, OutputAsset  } from 'rollup';
+import { NormalizedOutputOptions, OutputBundle, OutputChunk, OutputAsset } from 'rollup';
 
 type CssAsset = {
   content: string;
@@ -10,8 +10,9 @@ type CssAsset = {
 };
 
 export function vueBuildInjectedCss(): Plugin {
-
   const cssInjections: { [jsFileName: string]: CssAsset[] } = {};
+
+  let outputDir;
 
   return {
     name: 'vite-plugin-vue-build-injected-css',
@@ -19,6 +20,7 @@ export function vueBuildInjectedCss(): Plugin {
     generateBundle(options: NormalizedOutputOptions, bundle: OutputBundle, isWrite: boolean) {
       const cssFiles: { [fileName: string]: OutputAsset } = {};
       const jsFiles: { [fileName: string]: OutputChunk } = {};
+      outputDir = options.dir || 'dist'; // Use options.dir or fallback to 'dist'
 
       for (const [fileName, chunk] of Object.entries(bundle)) {
         if (chunk.type === 'asset' && fileName.endsWith('.css')) {
@@ -36,7 +38,7 @@ export function vueBuildInjectedCss(): Plugin {
               if (!cssInjections[jsFileName]) {
                 cssInjections[jsFileName] = [];
               }
-              const cssAsset : CssAsset = { content: `${cssFile.source}`, file: join('dist', cssFileName) };
+              const cssAsset: CssAsset = { content: `${cssFile.source}`, file: join(outputDir, cssFileName) };
               cssInjections[jsFileName].push(cssAsset);
             }
           }
@@ -46,7 +48,7 @@ export function vueBuildInjectedCss(): Plugin {
 
     closeBundle() {
       for (const [jsFileName, cssAssets] of Object.entries(cssInjections)) {
-        const jsFilePath = join(__dirname, 'dist', jsFileName);
+        const jsFilePath = join(outputDir, jsFileName);
         const jsFileExists = existsSync(jsFilePath);
         if (jsFileExists) {
           const jsContent = readFileSync(jsFilePath, 'utf8');
@@ -56,7 +58,7 @@ export function vueBuildInjectedCss(): Plugin {
           writeFileSync(jsFilePath, updatedJsContent, 'utf8');
           cssAssets.forEach(cssAsset => {
             console.log('removing injected styles', cssAsset.file);
-            rmSync(cssAsset.file, { force: true});
+            rmSync(cssAsset.file, { force: true });
           });
         }
       }

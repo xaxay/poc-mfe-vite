@@ -17,6 +17,8 @@ import { vueBuildInjectedCss } from './vite-plugin-vue-build-injected-css';
 const config = defineConfig((env: ConfigEnv) => { 
 
   return {
+    base: './',
+
     plugins: [
       ImportMapsPlugin(),
   
@@ -64,6 +66,8 @@ const config = defineConfig((env: ConfigEnv) => {
     
     build: {
       // minify: false,
+
+      outDir: 'docs',
     }
   } as UserConfig;
 })
