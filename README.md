@@ -36,6 +36,7 @@ For simplicity all modules are exposed from one repo!
 - [POC Distributed SPA : Phase 2](https://github.com/xaxay/poc-mfe-vite/) It is full-fledged development version.
 - [POC Distributed SPA : Phase-3](https://github.com/xaxay/poc-mfe-vite-root) Using of multiple repositiories.
 
+- [Vite](https://vitejs.dev/)
 - [Vue 3](https://vuejs.org/)
 - [Vue Router](https://router.vuejs.org/)
 - [Pinia](https://pinia.vuejs.org/)
