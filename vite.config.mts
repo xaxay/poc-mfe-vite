@@ -13,6 +13,8 @@ import { fileURLToPath, URL } from 'node:url'
 
 import { vueBuildInjectedCss } from './vite-plugin-vue-build-injected-css';
 
+import { string } from "rollup-plugin-string";
+
 // https://vitejs.dev/config/
 const config = defineConfig((env: ConfigEnv) => { 
 
@@ -25,6 +27,10 @@ const config = defineConfig((env: ConfigEnv) => {
       Vue({
         template: { transformAssetUrls },
       }),
+
+      // string({
+      //   include: './_plugin-vue_export-helper-*.js', // inline it
+      // }),
 
       vueBuildInjectedCss(),
 
@@ -68,6 +74,12 @@ const config = defineConfig((env: ConfigEnv) => {
       // minify: false,
 
       outDir: 'docs',
+
+      rollupOptions: {
+        output: {
+          // inlineDynamicImports: true
+        }
+      }
     }
   } as UserConfig;
 })

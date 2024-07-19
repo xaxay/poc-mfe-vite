@@ -188,7 +188,16 @@ export function ImportMapsPlugin(config: ImportMapsConfig = {
                 },
 
                 chunkFileNames(chunkInfo: PreRenderedChunk): string {
-                  console.log(chalk.blue.bold('[chunkFileNames]'), chalk.magenta(chunkInfo.name), chunkInfo.facadeModuleId);//, chunkInfo);
+                  const chunkName: string = chunkInfo.name;
+                  console.log(chalk.blue.bold('[chunkFileNames]'), chalk.magenta(chunkName), chunkInfo.facadeModuleId);//, chunkInfo);
+                  if (chunkName.includes('_')) {
+                    let updatedChunkName = chunkName;
+                    // if (updatedChunkName.startsWith('_')) {
+                    //   updatedChunkName = chunkName.substring(1);
+                    // }
+                    updatedChunkName = updatedChunkName.replaceAll('_', '--');
+                    return `assets/${updatedChunkName}-[hash].js`;
+                  }
                   return 'assets/[name]-[hash].js';
                 },
 
