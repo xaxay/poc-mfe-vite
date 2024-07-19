@@ -3,13 +3,14 @@
 ## Introduction
 
 A proof of concept for a Distributed SPA, enabling separate teams to develop and manage UI components independently.
+
 It is full-fledged development version that is bases on
 
 Vite / ImportMaps / HTML / JS / CSS / Vue3 / Vuetify3 / Pinia / ESLint / PlayWrite.
 
 
 ## References
-- [Phase-1](https://github.com/xaxay/poc-mfe-pure) pure implementation - no any bundler.
+- [Phase-1](https://github.com/xaxay/poc-mfe-pure) pure implementation without any bundler.
 
 - [Vue 3](https://vuejs.org/)
 - [Vue Router](https://router.vuejs.org/)
