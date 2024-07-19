@@ -26,6 +26,6 @@
     "src/**/*",
     "src/**/*.vue"
   ],
-  "exclude": ["docs", "node_modules", "cypress"],
+  "exclude": ["dist", "docs", "node_modules", "cypress"],
   "references": [{ "path": "./tsconfig.node.json" }],
 }
