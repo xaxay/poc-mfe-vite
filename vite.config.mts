@@ -1,6 +1,7 @@
 // vite.config.mts
 import { ConfigEnv, Plugin, UserConfig } from 'vite';
 import Vue from '@vitejs/plugin-vue'
+import baseUrl from './src/config/baseUrl';
 
 // import vuetify, { transformAssetUrls } from 'vite-plugin-vuetify'
 
@@ -19,7 +20,7 @@ import { vueBuildInjectedCss } from './vite-plugin-vue-build-injected-css';
 const config = defineConfig((env: ConfigEnv) => { 
 
   return {
-    base: '/', // TODO: keep actual the baseUrl
+    base: baseUrl,
 
     plugins: [
       ImportMapsPlugin(),

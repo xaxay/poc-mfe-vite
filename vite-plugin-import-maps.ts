@@ -3,7 +3,7 @@ import { existsSync, readFileSync } from 'fs';
 import { ConfigEnv, Plugin } from 'vite';
 import { fileURLToPath, URL } from 'node:url';
 import externalize from 'vite-plugin-externalize-dependencies';
-import { resolve, basename } from 'path';
+import { resolve, basename, join } from 'path';
 import chalk from 'chalk';
 import { NormalizedOutputOptions, OutputBundle, PreRenderedAsset, PreRenderedChunk } from 'rollup';
 
@@ -91,6 +91,8 @@ export function ImportMapsPlugin(config: ImportMapsConfig = {
   let inputs: { [name: string]: string } = {};
   let inputKeysSet: Set<string> = new Set();
 
+  let baseUrl = '/';
+
 
   function updateImportMaps() {
     const importMaps: ImportMap[] = loadImportMapFiles(devMode, config);
@@ -139,6 +141,11 @@ export function ImportMapsPlugin(config: ImportMapsConfig = {
 
     config(config: any, env: ConfigEnv) {
       devMode = env.command === 'serve';
+
+      if (config.base) {
+        baseUrl = config.base;
+        console.log('baseUrl:', baseUrl);
+      }
 
       updateImportMaps();
 
@@ -231,7 +238,7 @@ export function ImportMapsPlugin(config: ImportMapsConfig = {
         const name: string = file.name;
         if (inputKeysSet.has(name) && importMap.imports[name]) {
           console.log(chalk.blue.bold('[map-import]'), chalk.magenta(name), chalk.greenBright(fileName), chalk.cyanBright(importMap.imports[name]));
-          importMap.imports[name] = `/${fileName}`;
+          importMap.imports[name] = join(baseUrl, fileName);
         } 
       });
 

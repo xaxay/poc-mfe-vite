@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
 import routesConfig, { RouteDef } from '@browser-module/config/routes';
+import baseUrl from './config/baseUrl';
 
 const routeEntries: [string, RouteDef][] = Object.entries(routesConfig.routes);
 
@@ -10,7 +11,6 @@ const routes: RouteRecordRaw[] = routeEntries.map(([path, data]) => ({
     meta: { title: data.title }
 }));
 
-export const baseUrl: string = routesConfig.baseUrl || '/';
 export const defaultRoutePath: string | undefined = routesConfig.defaultPath;
 if (defaultRoutePath) {
     routes.push({ path: '/:pathMatch(.*)*', redirect: defaultRoutePath || '/' });

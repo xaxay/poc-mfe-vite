@@ -5,8 +5,6 @@ import { RoutesConfig } from "@/types/routeTypes";
 
 const routesConfig: RoutesConfig = {
   
-  baseUrl: '/', // TODO: keep actual the baseUrl
-
   defaultPath: '/dashboard',
 
   routes: {

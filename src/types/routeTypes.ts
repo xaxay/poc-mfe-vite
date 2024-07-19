@@ -12,7 +12,6 @@ export type RouteDefs = {
   };
   
   export type RoutesConfig = {
-    baseUrl: string;
     defaultPath: string,
     routes: RouteDefs,
   }
