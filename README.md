@@ -9,7 +9,7 @@ Vite / ImportMaps / HTML / JS / CSS / Vue3 / Vuetify3 / Pinia / ESLint / PlayWri
 
 
 ## References
-- [Phase-1](https://github.com/xaxay/poc-mfe-vite)
+- [Phase-1](https://github.com/xaxay/poc-mfe-pure) pure implementation - no any bundler.
 
 - [Vue 3](https://vuejs.org/)
 - [Vue Router](https://router.vuejs.org/)
