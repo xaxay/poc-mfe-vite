@@ -12,8 +12,8 @@ Vite / ImportMaps / HTML / JS / CSS / Vue3 / Vuetify3 / Pinia / ESLint / PlayWri
 
 [Click to see Demo](https://xaxay.github.io/poc-mfe-vite/)
 
-It proves that it works and demonstrate how all these parts are initialized
-and interacted together from different in-browser modules!
+It proves that it works and demonstrate how all these parts are initialized and interacted together from different in-browser modules!
+
 For simplicity all modules are exposed from one repo!
 
 ## References
