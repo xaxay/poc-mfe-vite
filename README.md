@@ -6,7 +6,7 @@ A proof of concept for a Distributed SPA, enabling separate teams to develop and
 
 It is full-fledged development version that is bases on
 
-Vite / ImportMaps / HTML / JS / CSS / Vue3 / Vuetify3 / Pinia / ESLint / PlayWrite.
+Vite / ImportMaps / HTML / JS / CSS / Vue3 / Vuetify3 / Pinia.
 
 # Demo
 
