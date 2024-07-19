@@ -17,7 +17,7 @@ and interacted together from different in-browser modules!
 For simplicity all modules are exposed from one repo!
 
 ## References
-- [POC Distributed SPA : Phase-1](https://github.com/xaxay/poc-mfe-pure) pure implementation without any bundler.
+- [POC Distributed SPA : Phase-1](https://github.com/xaxay/poc-mfe-pure) Pure implementation without any bundler.
 - [POC Distributed SPA : Phase 2](https://github.com/xaxay/poc-mfe-vite/) It is full-fledged development version.
 - [POC Distributed SPA : Phase-3](https://github.com/xaxay/poc-mfe-vite-root) Using of multiple repositiories.
 
