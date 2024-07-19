@@ -1,19 +1,11 @@
 // src/types/shim-routes.d.ts
 
 declare module "@browser-module/config/routes" {
-  export type RouteDefs = {
-      [path: string]: RouteDef;
-  };
-  export type RouteDef = {
-      title: string;
-      module: string;
-      icon?: string;
-      dashboard?: boolean;
-  };
-  export type RoutesConfig = {
-      defaultPath: string;
-      routes: RouteDefs;
-  };
+
+  import { RoutesConfig, RouteDef, RouteDefs } from '../types/routeTypes'
+  
   declare const routesConfig: RoutesConfig;
+
   export default routesConfig;
+  export { RoutesConfig, RouteDef, RouteDefs };
 }

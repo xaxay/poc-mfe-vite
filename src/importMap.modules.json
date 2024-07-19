@@ -1,27 +1,35 @@
 {
   "imports": {
     "@browser-module/router": "/src/router.ts",
-    "@browser-module/config/routes": "/src/routes.ts",
+    "@browser-module/config/routes": "/src/config/routes.ts",
+
     "@browser-module/stores/counter": "/src/stores/counterStore.ts",
-    "@browser-module/ui/header": "/src/components/PortalHeader.vue",
-    "@browser-module/ui/dashboard": "/src/components/PortalDashboard.vue",
-    "@browser-module/ui/admin": "/src/components/PortalPluginStub.vue",
-    "@browser-module/ui/account": "/src/components/PortalPluginStub.vue",
-    "@browser-module/ui/rumors": "/src/components/PortalPluginStub.vue",
-    "@browser-module/ui/app4": "/src/components/PortalPluginStub.vue",
-    "@browser-module/ui/app5": "/src/components/PortalPluginStub.vue",
-    "@browser-module/ui/app6": "/src/components/PortalPluginStub.vue",
-    "@browser-module/ui/app7": "/src/components/PortalPluginStub.vue",
-    "@browser-module/ui/app8": "/src/components/PortalPluginStub.vue",
-    "@browser-module/ui/app9": "/src/components/PortalPluginStub.vue",
-    "@browser-module/ui/app10": "/src/components/PortalPluginStub.vue",
-    "@browser-module/ui/app11": "/src/components/PortalPluginStub.vue",
-    "@browser-module/ui/app12": "/src/components/PortalPluginStub.vue",
-    "@browser-module/ui/app13": "/src/components/PortalPluginStub.vue",
-    "@browser-module/ui/app14": "/src/components/PortalPluginStub.vue",
-    "@browser-module/ui/app15": "/src/components/PortalPluginStub.vue",
-    "@browser-module/ui/app16": "/src/components/PortalPluginStub.vue",
-    "@browser-module/ui/app17": "/src/components/PortalPluginStub.vue",
-    "@browser-module/ui/app18": "/src/components/PortalPluginStub.vue"
+
+    "@browser-module/api/user": "/src/api/user.ts",
+
+    "@browser-module/ui/header": "/src/components/Header.vue",
+
+    "@browser-module/ui/login": "/src/pages/Login.vue",
+    "@browser-module/ui/dashboard": "/src/pages/Dashboard.vue",
+
+    "@browser-module/ui/admin": "/src/components/CounterClicker.vue",
+    "@browser-module/ui/account": "/src/components/CounterClicker.vue",
+    "@browser-module/ui/rumors": "/src/components/CounterClicker.vue",
+
+    "@browser-module/ui/app4": "/src/components/CounterClicker.vue",
+    "@browser-module/ui/app5": "/src/components/CounterClicker.vue",
+    "@browser-module/ui/app6": "/src/components/CounterClicker.vue",
+    "@browser-module/ui/app7": "/src/components/CounterClicker.vue",
+    "@browser-module/ui/app8": "/src/components/CounterClicker.vue",
+    "@browser-module/ui/app9": "/src/components/CounterClicker.vue",
+    "@browser-module/ui/app10": "/src/components/CounterClicker.vue",
+    "@browser-module/ui/app11": "/src/components/CounterClicker.vue",
+    "@browser-module/ui/app12": "/src/components/CounterClicker.vue",
+    "@browser-module/ui/app13": "/src/components/CounterClicker.vue",
+    "@browser-module/ui/app14": "/src/components/CounterClicker.vue",
+    "@browser-module/ui/app15": "/src/components/CounterClicker.vue",
+    "@browser-module/ui/app16": "/src/components/CounterClicker.vue",
+    "@browser-module/ui/app17": "/src/components/CounterClicker.vue",
+    "@browser-module/ui/app18": "/src/components/CounterClicker.vue"
   }
 }

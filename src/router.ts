@@ -10,19 +10,16 @@ const routes: RouteRecordRaw[] = routeEntries.map(([path, data]) => ({
     meta: { title: data.title }
 }));
 
+const baseUrl: string = routesConfig.baseUrl || '/';
 const defaultRoutePath: string | undefined = routesConfig.defaultPath;
 if (defaultRoutePath) {
-    routes.unshift({ path: '/', redirect: defaultRoutePath });
+    routes.push({ path: '/:pathMatch(.*)*', redirect: defaultRoutePath });
 }
 
-console.log('top level routes:', routes);
-
-const currentPath = window.location.pathname;
-let BASE_URL = currentPath.substring(0, currentPath.length-1);
-console.log('BASE_URL', BASE_URL);
+console.log('baseUrl', baseUrl, 'top level routes:', routes);
 
 export const router = createRouter({
-    history: createWebHistory(BASE_URL),
+    history: createWebHistory(baseUrl),
     routes
 });
 

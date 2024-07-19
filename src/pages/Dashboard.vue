@@ -51,8 +51,6 @@
         return apps.value.filter(app => !searchQuery.value || app.name.toLowerCase().includes(search));
       });
 
-      console.log('filteredApps', filteredApps, 'apps', apps);
-  
       return {
         searchQuery,
         filteredApps,
