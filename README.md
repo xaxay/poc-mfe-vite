@@ -42,7 +42,6 @@ For simplicity all modules are exposed from one repo!
 - [Pinia](https://pinia.vuejs.org/)
 - [Vuetify 3](https://next.vuetifyjs.com/en/)
 - [Import Maps](https://github.com/WICG/import-maps)
-- [MDI Icons](https://materialdesignicons.com/)
 - [Single-SPA](https://single-spa.js.org/)
 
 
