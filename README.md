@@ -8,15 +8,17 @@ It is full-fledged development version that is bases on
 
 Vite / ImportMaps / HTML / JS / CSS / Vue3 / Vuetify3 / Pinia / ESLint / PlayWrite.
 
-# Phase 2
+# Demo
 
 [Click to see Demo](https://xaxay.github.io/poc-mfe-vite/)
 
 It proves that it works and demonstrate how all these parts are initialized
 and interacted together from different in-browser modules!
+For simplicity all modules are exposed from one repo!
 
 ## References
 - [Phase-1](https://github.com/xaxay/poc-mfe-pure) pure implementation without any bundler.
+- [Phase-3](https://github.com/xaxay/poc-mfe-vite-root) using of multiple repositiories.
 
 - [Vue 3](https://vuejs.org/)
 - [Vue Router](https://router.vuejs.org/)
