@@ -17,9 +17,9 @@ and interacted together from different in-browser modules!
 For simplicity all modules are exposed from one repo!
 
 ## References
-- [Phase-1](https://github.com/xaxay/poc-mfe-pure) pure implementation without any bundler.
-- [Phase 2](https://github.com/xaxay/poc-mfe-vite/) It is full-fledged development version.
-- [Phase-3](https://github.com/xaxay/poc-mfe-vite-root) Using of multiple repositiories.
+- [POC Distributed SPA : Phase-1](https://github.com/xaxay/poc-mfe-pure) pure implementation without any bundler.
+- [POC Distributed SPA : Phase 2](https://github.com/xaxay/poc-mfe-vite/) It is full-fledged development version.
+- [POC Distributed SPA : Phase-3](https://github.com/xaxay/poc-mfe-vite-root) Using of multiple repositiories.
 
 - [Vue 3](https://vuejs.org/)
 - [Vue Router](https://router.vuejs.org/)
