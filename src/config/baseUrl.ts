@@ -1,3 +1,3 @@
 // config/baseUrl.ts
 
-export default '/'; // poc-mfe-vite
+export default '/poc-mfe-vite/';

@@ -84,6 +84,11 @@ export function ImportMapsPlugin(config: ImportMapsConfig = {
 
   let devMode = true;
 
+  let importMapSrc: ImportMap = {
+    imports: {},
+    scopes: {}
+  };
+
   let importMap: ImportMap = {
     imports: {},
     scopes: {}
@@ -97,34 +102,33 @@ export function ImportMapsPlugin(config: ImportMapsConfig = {
   function updateImportMaps() {
     const importMaps: ImportMap[] = loadImportMapFiles(devMode, config);
 
-    importMap = joinImportMaps(importMaps);
-
-    console.log('[updateImportMaps]', baseUrl, importMap);
-
-    for (const [moduleName, moduleUrl] of Object.entries(importMap.imports)) {
-      if (moduleUrl.startsWith('/')) {
-        const newModuleUrl = join(baseUrl, moduleUrl);
-        importMap.imports[moduleName] = newModuleUrl;
-      }
-    }
-
-    console.log('[updateImportMaps]2', baseUrl, importMap);
+    importMapSrc = joinImportMaps(importMaps);
+    importMap = { imports: { ...importMapSrc.imports }, scopes: { ...importMapSrc.scopes } };
 
     externalDependencies = Object.keys(importMap.imports);
 
     inputs = {
-      index: resolve(__dirname, baseUrl, 'index.html')
+      index: resolve(__dirname, 'index.html')
     };
 
     Object.entries(importMap.imports).forEach(([k, v]) => {
       if (v.startsWith('http://') || v.startsWith('https://')) {
         return;
       }
-      inputs[k] = resolve(__dirname, baseUrl, v);
+      inputs[k] = resolve(__dirname, v);
     });
 
     const inputKeysArray = Object.keys(inputs);
     inputKeysSet = new Set(inputKeysArray);
+  }
+
+  function useBaseUrlInImportMap() {
+    for (const [moduleName, moduleUrl] of Object.entries(importMap.imports)) {
+      if (moduleUrl.startsWith('/')) {
+        const newModuleUrl = join(baseUrl, importMapSrc.imports[moduleName]);
+        importMap.imports[moduleName] = newModuleUrl;
+      }
+    }
   }
 
   function isExternal(moduleName: string): boolean {
@@ -230,8 +234,11 @@ export function ImportMapsPlugin(config: ImportMapsConfig = {
     transformIndexHtml: {
       order: 'post' as const,
       async handler(html: string, ctx: { path: string; filename: string }) {
-        console.log('transformIndexHtml', 'filename:', ctx.filename, 'path:', ctx.path);
+        // console.log('transformIndexHtml', 'filename:', ctx.filename, 'path:', ctx.path);
         if (externalDependencies.length > 0) {
+          if (devMode) {
+            useBaseUrlInImportMap(); // in build mode it is updated inside generateBundle
+          }
           const importMapAsString = `<script type="${config.importMaps?.type ?? 'importmap'}">\n${JSON.stringify(importMap, null, 2)}\n</script>`;
           return html.replace('</head>', `${importMapAsString}\n  </head>`);
         }

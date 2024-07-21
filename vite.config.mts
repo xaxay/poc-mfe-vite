@@ -27,7 +27,7 @@ const config = defineConfig((env: ConfigEnv) => {
     base: baseUrl,
 
     plugins: [
-      ImportMapsPlugin(),
+
   
       Vue({
         template: { transformAssetUrls },
@@ -42,6 +42,8 @@ const config = defineConfig((env: ConfigEnv) => {
         styles: 'sass',
         injectCSS: true
       }),
+
+      ImportMapsPlugin(),
 
       {
         name: 'log-config-plugin',
