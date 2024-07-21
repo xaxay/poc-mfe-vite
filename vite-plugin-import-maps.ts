@@ -6,6 +6,9 @@ import externalize from 'vite-plugin-externalize-dependencies';
 import { resolve, basename, join } from 'path';
 import chalk from 'chalk';
 import { NormalizedOutputOptions, OutputBundle, PreRenderedAsset, PreRenderedChunk } from 'rollup';
+import baseUrl from './src/config/baseUrl';
+console.log('baseUrl:', baseUrl);
+
 
 export interface ImportMapsConfig {
   importMaps: {
@@ -91,25 +94,33 @@ export function ImportMapsPlugin(config: ImportMapsConfig = {
   let inputs: { [name: string]: string } = {};
   let inputKeysSet: Set<string> = new Set();
 
-  let baseUrl = '/';
-
-
   function updateImportMaps() {
     const importMaps: ImportMap[] = loadImportMapFiles(devMode, config);
 
     importMap = joinImportMaps(importMaps);
 
+    console.log('[updateImportMaps]', baseUrl, importMap);
+
+    for (const [moduleName, moduleUrl] of Object.entries(importMap.imports)) {
+      if (moduleUrl.startsWith('/')) {
+        const newModuleUrl = join(baseUrl, moduleUrl);
+        importMap.imports[moduleName] = newModuleUrl;
+      }
+    }
+
+    console.log('[updateImportMaps]2', baseUrl, importMap);
+
     externalDependencies = Object.keys(importMap.imports);
 
     inputs = {
-      index: resolve(__dirname, 'index.html')
+      index: resolve(__dirname, baseUrl, 'index.html')
     };
 
     Object.entries(importMap.imports).forEach(([k, v]) => {
       if (v.startsWith('http://') || v.startsWith('https://')) {
         return;
       }
-      inputs[k] = resolve(__dirname, v);
+      inputs[k] = resolve(__dirname, baseUrl, v);
     });
 
     const inputKeysArray = Object.keys(inputs);
@@ -141,11 +152,6 @@ export function ImportMapsPlugin(config: ImportMapsConfig = {
 
     config(config: any, env: ConfigEnv) {
       devMode = env.command === 'serve';
-
-      if (config.base) {
-        baseUrl = config.base;
-        console.log('baseUrl:', baseUrl);
-      }
 
       updateImportMaps();
 

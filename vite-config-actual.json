@@ -1,8 +1,8 @@
 {
-  "base": "/poc-mfe-vite/",
+  "base": "/",
   "plugins": [
     {
-      "name": "vite:build-metadata"
+      "name": "vite:optimized-deps"
     },
     {
       "name": "vite:watch-package-data"
@@ -197,7 +197,7 @@
             }
           },
           "root": "/home/mpopel/lab/mfe-portal/portal-ui-root-min",
-          "sourceMap": false,
+          "sourceMap": true,
           "cssDevSourcemap": false,
           "devToolsEnabled": false
         },
@@ -220,23 +220,10 @@
       "name": "vite:css-post"
     },
     {
-      "name": "vite:build-html"
-    },
-    {
       "name": "vite:worker-import-meta-url"
     },
     {
       "name": "vite:asset-import-meta-url"
-    },
-    {
-      "name": "vite:force-systemjs-wrap-complete"
-    },
-    {
-      "name": "commonjs",
-      "version": "26.0.1"
-    },
-    {
-      "name": "vite:data-uri"
     },
     {
       "name": "vite:dynamic-import-vars"
@@ -245,19 +232,13 @@
       "name": "vite:import-glob"
     },
     {
-      "name": "vite:build-import-analysis"
+      "name": "vite:client-inject"
     },
     {
-      "name": "vite:esbuild-transpile"
+      "name": "vite:css-analysis"
     },
     {
-      "name": "vite:terser"
-    },
-    {
-      "name": "vite:reporter"
-    },
-    {
-      "name": "vite:load-fallback"
+      "name": "vite:import-analysis"
     }
   ],
   "define": {
@@ -467,7 +448,7 @@
       "output": {},
       "preserveEntrySignatures": "strict",
       "input": {
-        "index": "/home/mpopel/lab/mfe-portal/portal-ui-root-min/index.html",
+        "index": "/index.html",
         "@browser-module/router": "/src/router.ts",
         "@browser-module/config/routes": "/src/config/routes.ts",
         "@browser-module/stores/counter": "/src/stores/counterStore.ts",
@@ -528,6 +509,7 @@
     },
     "cssMinify": true
   },
+  "preview": {},
   "ssr": {
     "target": "node",
     "external": [],
@@ -547,13 +529,14 @@
     "/home/mpopel/lab/mfe-portal/portal-ui-root-min/vite.config.mts"
   ],
   "inlineConfig": {
-    "build": {}
+    "build": {},
+    "preview": {}
   },
   "root": "/home/mpopel/lab/mfe-portal/portal-ui-root-min",
-  "rawBase": "/poc-mfe-vite",
+  "rawBase": "/",
   "publicDir": "/home/mpopel/lab/mfe-portal/portal-ui-root-min/public",
   "cacheDir": "/home/mpopel/lab/mfe-portal/portal-ui-root-min/node_modules/.vite",
-  "command": "build",
+  "command": "serve",
   "mode": "production",
   "isWorker": false,
   "mainConfig": null,
@@ -563,10 +546,9 @@
   "esbuild": {
     "jsxDev": false
   },
-  "preview": {},
   "envDir": "/home/mpopel/lab/mfe-portal/portal-ui-root-min",
   "env": {
-    "BASE_URL": "/poc-mfe-vite",
+    "BASE_URL": "/",
     "MODE": "production",
     "DEV": false,
     "PROD": true
