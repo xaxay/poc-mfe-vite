@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
 import routesConfig, { RouteDef } from '@browser-module/config/routes';
-import baseUrl from './config/baseUrl';
+const baseUrl = import.meta.env.BASE_URL;
 
 const routeEntries: [string, RouteDef][] = Object.entries(routesConfig.routes);
 
