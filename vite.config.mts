@@ -13,6 +13,10 @@ import { defineConfig } from 'vite'
 import { fileURLToPath, URL } from 'node:url'
 
 import { vueBuildInjectedCss } from './vite-plugin-vue-build-injected-css';
+import chalk from 'chalk';
+import util from 'util';
+import path from 'path';
+import fs from 'fs';
 
 // import rewriteAll from 'vite-plugin-rewrite-all';
 
@@ -29,9 +33,6 @@ const config = defineConfig((env: ConfigEnv) => {
         template: { transformAssetUrls },
       }),
 
-      // string({
-      //   include: './_plugin-vue_export-helper-*.js', // inline it
-      // }),
 
       vueBuildInjectedCss(),
 
@@ -42,12 +43,15 @@ const config = defineConfig((env: ConfigEnv) => {
         injectCSS: true
       }),
 
-      // {
-      //   name: 'log-config-plugin',
-      //   configResolved(config) {
-      //     console.log(chalk.bold.red('Resolved Vite Configuration:\n'), chalk.red(util.inspect(config, { showHidden: false, depth: null, colors: true })));
-      //   }
-      // } as Plugin
+      {
+        name: 'log-config-plugin',
+        configResolved(config) {
+          // const outputPath = path.resolve(__dirname, `vite-config-${env.command === 'serve' ? 'dev' : 'build'}-actual.json`);
+          const outputPath = path.resolve(__dirname, `vite-config-actual.json`);
+          fs.writeFileSync(outputPath, JSON.stringify(config, null, 2));
+          console.log(`Resolved Vite configuration has been written to ${outputPath}`);
+        }
+      } as Plugin,
     ],
 
     define: { 'process.env': {} },
