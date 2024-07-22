@@ -6,7 +6,7 @@ import UserDetails from './UserDetails.vue';
 import { RouteDef } from '@browser-module/config/routes';
 
 
-export function createRoutes(parentRouteDef: RouteDef): RouteRecordRaw[] {
+export function createRouteChildren(parentRouteDef: RouteDef): RouteRecordRaw[] {
   const title : string = parentRouteDef.title;
   return [
     {
