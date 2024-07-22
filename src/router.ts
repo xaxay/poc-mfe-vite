@@ -1,3 +1,4 @@
+// router.ts
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
 import routesConfig, { RouteDef } from '@browser-module/config/routes';
 import { isLogined } from '@browser-module/api/user';
