@@ -2,7 +2,7 @@
   "base": "/poc-mfe-vite/",
   "plugins": [
     {
-      "name": "vite:optimized-deps"
+      "name": "vite:build-metadata"
     },
     {
       "name": "vite:watch-package-data"
@@ -191,7 +191,7 @@
             }
           },
           "root": "/home/mpopel/lab/poc-mfe-vite",
-          "sourceMap": true,
+          "sourceMap": false,
           "cssDevSourcemap": false,
           "devToolsEnabled": false
         },
@@ -223,10 +223,23 @@
       "name": "vite:css-post"
     },
     {
+      "name": "vite:build-html"
+    },
+    {
       "name": "vite:worker-import-meta-url"
     },
     {
       "name": "vite:asset-import-meta-url"
+    },
+    {
+      "name": "vite:force-systemjs-wrap-complete"
+    },
+    {
+      "name": "commonjs",
+      "version": "26.0.1"
+    },
+    {
+      "name": "vite:data-uri"
     },
     {
       "name": "vite:dynamic-import-vars"
@@ -235,13 +248,19 @@
       "name": "vite:import-glob"
     },
     {
-      "name": "vite:client-inject"
+      "name": "vite:build-import-analysis"
     },
     {
-      "name": "vite:css-analysis"
+      "name": "vite:esbuild-transpile"
     },
     {
-      "name": "vite:import-analysis"
+      "name": "vite:terser"
+    },
+    {
+      "name": "vite:reporter"
+    },
+    {
+      "name": "vite:load-fallback"
     }
   ],
   "define": {
@@ -512,7 +531,6 @@
     },
     "cssMinify": true
   },
-  "preview": {},
   "ssr": {
     "target": "node",
     "external": [],
@@ -532,14 +550,13 @@
     "/home/mpopel/lab/poc-mfe-vite/vite.config.mts"
   ],
   "inlineConfig": {
-    "build": {},
-    "preview": {}
+    "build": {}
   },
   "root": "/home/mpopel/lab/poc-mfe-vite",
   "rawBase": "/poc-mfe-vite/",
   "publicDir": "/home/mpopel/lab/poc-mfe-vite/public",
   "cacheDir": "/home/mpopel/lab/poc-mfe-vite/node_modules/.vite",
-  "command": "serve",
+  "command": "build",
   "mode": "production",
   "isWorker": false,
   "mainConfig": null,
@@ -549,6 +566,7 @@
   "esbuild": {
     "jsxDev": false
   },
+  "preview": {},
   "envDir": "/home/mpopel/lab/poc-mfe-vite",
   "env": {
     "BASE_URL": "/poc-mfe-vite/",
