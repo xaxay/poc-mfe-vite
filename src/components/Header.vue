@@ -48,22 +48,18 @@
 <script setup lang="ts">
 import { ref, computed, onMounted, onUnmounted } from 'vue';
 import { useCounterStore } from '@browser-module/stores/counter';
-import routesConfig, { RoutesConfig } from '@browser-module/config/routes';
-import { useRouter, useRoute } from 'vue-router';
+import { router } from '@browser-module/router';
+import routesConfig, { RoutesConfig, RouteDef } from '@browser-module/config/routes';
 import { getUserLogin, logout, isLogined, getExpiredInSeconds } from '@browser-module/api/user';
 
 const store = useCounterStore();
 
 const userIcon = ref<string>('mdi-account');
 
-const router = useRouter();
-const route = useRoute();
+const isDashboardPage = computed<boolean>(() => router.currentRoute.value.path === routesConfig.defaultPath);
 
-const isDashboardPage = computed<boolean>(() => router.currentRoute.value.path === '/dashboard');
-
-const title = computed<string>(() => {
-  const routeDef: RoutesConfig | undefined = routesConfig.routes[route.path];
-  return routeDef?.title || '';
+const title = computed<string>((): string => {
+  return router.currentRoute.value.meta.title as string || '';
 });
 
 const counter = computed<number>(() => store.counter);
