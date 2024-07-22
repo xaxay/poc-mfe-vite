@@ -35,7 +35,7 @@
   </v-container>
 </template>
 
-<script>
+<script lang="ts">
   import { ref } from 'vue';
   import { router } from '@browser-module/router';
   import { login } from '@browser-module/api/user';
@@ -48,13 +48,13 @@
       }
     },
     setup(props) {
-      const name = ref('');
-      const password = ref('');
-      const errorMessage = ref('');
+      const name = ref<string>('');
+      const password = ref<string>('');
+      const errorMessage = ref<string>('');
 
-      const handleLogin = async () => {
+      const handleLogin = async () : Promise<void> => {
         try {
-          const success = await login(name.value, password.value);
+          const success: boolean = await login(name.value, password.value);
           if (success) {
             router.push(props.redirectTo);
           } else {
