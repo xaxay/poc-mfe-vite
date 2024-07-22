@@ -8,7 +8,8 @@ export type RouteDefs = {
     title: string;
     module: string;
     icon?: string;
-    dashboard?: boolean; 
+    dashboard?: boolean;
+    requiresAuth?: boolean;
   };
   
   export type RoutesConfig = {

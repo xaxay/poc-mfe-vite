@@ -5,49 +5,64 @@
     <span class="title">{{ title }}</span>
   </v-toolbar-title>
 
-  <template v-if="!isDashboardPage">
-    <v-btn icon @click="goToDashboard">
-      <v-icon>mdi-view-dashboard</v-icon>
+  <template v-if="logined">
+    <template v-if="!isDashboardPage">
+      <v-btn icon @click="goToDashboard">
+        <v-icon>mdi-view-dashboard</v-icon>
+        <v-tooltip activator="parent" location="bottom">
+          <b>Dashboard</b>
+          <br>Click to open
+        </v-tooltip>
+      </v-btn>
+    </template>
+
+    <v-btn icon @click="store.resetCounter">
+      <v-badge :content="counter" color="red" offset-x="-5" max="99">
+        <v-icon>mdi-bell</v-icon>
+      </v-badge>
       <v-tooltip activator="parent" location="bottom">
-        <b>Dashboard</b>
-        <br>Click to open
+        <b>Notifications</b>
+        <br>Click to reset
       </v-tooltip>
     </v-btn>
+
+    <v-avatar class="mx-4" @click="logout">
+      <v-icon>{{ userIcon }}</v-icon>
+      <v-tooltip activator="parent" location="bottom" content-class="tooltip-center">
+        <b>{{ userName }}</b>
+        <br/>Click to logout
+      </v-tooltip>
+    </v-avatar>
   </template>
 
-  <v-btn icon @click="store.resetCounter">
-    <v-badge :content="counter" color="red" offset-x="-5" max="99">
-      <v-icon>mdi-bell</v-icon>
-    </v-badge>
-    <v-tooltip activator="parent" location="bottom">
-      <b>Notifications</b>
-      <br>Click to reset
-    </v-tooltip>
-  </v-btn>
-
-  <v-avatar class="mx-4">
-    <v-icon>{{ userIcon }}</v-icon>
-  </v-avatar>
 </v-app-bar></template>
 
 <script setup>
   import { ref, computed } from 'vue';
-  import { useRouter, useRoute } from 'vue-router';
   import { useCounterStore } from '@browser-module/stores/counter';
   import routesConfig from '@browser-module/config/routes';
+  import { router }  from '@browser-module/router';
+  import { getUserLogin, logout, isLogined } from '@browser-module/api/user';
   
-  const router = useRouter();
-  const route = useRoute();
   const store = useCounterStore();
   
   const userIcon = ref('mdi-account');
+
+  const isDashboardPage = computed(() => router.currentRoute.value.path === '/dashboard');
   
-  const isDashboardPage = computed(() => route.path === '/dashboard');
-  
-  const title = computed(() => routesConfig[route.path]?.title || '');
+  const title = computed(() => {
+    const route = router.currentRoute.value;
+    const routeDef = routesConfig.routes[route?.path];
+    return routeDef?.title || ''
+  });
   
   const counter = computed(() => store.counter);
+
   
+  const userName = computed(() => getUserLogin());
+
+  const logined = computed(() => isLogined());
+
   const goToDashboard = () => {
     router.push('/dashboard');
   };
@@ -60,5 +75,9 @@
 
 .title {
   font-size: 1.5rem;
+}
+
+.tooltip-center .v-tooltip__content {
+  text-align: center;
 }
 </style>

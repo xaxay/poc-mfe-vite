@@ -23,7 +23,8 @@
   import { ref, computed } from 'vue';
   import { useRouter } from 'vue-router';
   import routesConfig from '@browser-module/config/routes';
-  
+  import { getUserPermissions } from '@browser-module/api/user';
+
   export default {
     setup() {
       const apps = ref([]);
@@ -31,9 +32,16 @@
       const router = useRouter();
   
       const routeEntries = Object.entries(routesConfig.routes);
-  
+
+      const permissions = getUserPermissions();
+
+      function isAllowedApp(appName) {
+        const allowed = permissions.includes(appName);
+        return allowed;
+      }
+
       routeEntries
-        .filter(([path, data]) => data.dashboard !== false)
+        .filter(([path, data]) => (data.dashboard === true) && isAllowedApp(path.substring(1)))
         .forEach(([path, data]) => {
           apps.value.push({
             name: data.title,

@@ -190,7 +190,7 @@
               ]
             }
           },
-          "root": "/home/mpopel/lab/mfe-portal/portal-ui-root-min",
+          "root": "/home/mpopel/lab/poc-mfe-vite",
           "sourceMap": true,
           "cssDevSourcemap": false,
           "devToolsEnabled": false
@@ -200,6 +200,9 @@
     },
     {
       "name": "vite-plugin-vue-build-injected-css"
+    },
+    {
+      "name": "vuetify:import-browser"
     },
     {
       "name": "vite-plugin-import-map",
@@ -271,7 +274,7 @@
     "alias": [
       {
         "find": "@",
-        "replacement": "/home/mpopel/lab/mfe-portal/portal-ui-root-min/src"
+        "replacement": "/home/mpopel/lab/poc-mfe-vite/src"
       },
       {
         "find": "axios",
@@ -411,11 +414,11 @@
       },
       {
         "find": {},
-        "replacement": "/@fs/home/mpopel/lab/mfe-portal/portal-ui-root-min/node_modules/vite/dist/client/env.mjs"
+        "replacement": "/@fs/home/mpopel/lab/poc-mfe-vite/node_modules/vite/dist/client/env.mjs"
       },
       {
         "find": {},
-        "replacement": "/@fs/home/mpopel/lab/mfe-portal/portal-ui-root-min/node_modules/vite/dist/client/client.mjs"
+        "replacement": "/@fs/home/mpopel/lab/poc-mfe-vite/node_modules/vite/dist/client/client.mjs"
       }
     ]
   },
@@ -427,7 +430,7 @@
     "fs": {
       "strict": true,
       "allow": [
-        "/home/mpopel/lab/mfe-portal/portal-ui-root-min"
+        "/home/mpopel/lab/poc-mfe-vite"
       ],
       "deny": [
         ".env",
@@ -448,7 +451,7 @@
       "output": {},
       "preserveEntrySignatures": "strict",
       "input": {
-        "index": "/home/mpopel/lab/mfe-portal/portal-ui-root-min/index.html",
+        "index": "/home/mpopel/lab/poc-mfe-vite/index.html",
         "@browser-module/router": "/src/router.ts",
         "@browser-module/config/routes": "/src/config/routes.ts",
         "@browser-module/stores/counter": "/src/stores/counterStore.ts",
@@ -520,22 +523,22 @@
       }
     }
   },
-  "configFile": "/home/mpopel/lab/mfe-portal/portal-ui-root-min/vite.config.mts",
+  "configFile": "/home/mpopel/lab/poc-mfe-vite/vite.config.mts",
   "configFileDependencies": [
-    "/home/mpopel/lab/mfe-portal/portal-ui-root-min/src/config/baseUrl.ts",
-    "/home/mpopel/lab/mfe-portal/portal-ui-root-min/vite-plugin-vuetify-browser.ts",
-    "/home/mpopel/lab/mfe-portal/portal-ui-root-min/vite-plugin-import-maps.ts",
-    "/home/mpopel/lab/mfe-portal/portal-ui-root-min/vite-plugin-vue-build-injected-css.ts",
-    "/home/mpopel/lab/mfe-portal/portal-ui-root-min/vite.config.mts"
+    "/home/mpopel/lab/poc-mfe-vite/src/config/baseUrl.ts",
+    "/home/mpopel/lab/poc-mfe-vite/vite-plugin-vuetify-browser.ts",
+    "/home/mpopel/lab/poc-mfe-vite/vite-plugin-import-maps.ts",
+    "/home/mpopel/lab/poc-mfe-vite/vite-plugin-vue-build-injected-css.ts",
+    "/home/mpopel/lab/poc-mfe-vite/vite.config.mts"
   ],
   "inlineConfig": {
     "build": {},
     "preview": {}
   },
-  "root": "/home/mpopel/lab/mfe-portal/portal-ui-root-min",
+  "root": "/home/mpopel/lab/poc-mfe-vite",
   "rawBase": "/poc-mfe-vite/",
-  "publicDir": "/home/mpopel/lab/mfe-portal/portal-ui-root-min/public",
-  "cacheDir": "/home/mpopel/lab/mfe-portal/portal-ui-root-min/node_modules/.vite",
+  "publicDir": "/home/mpopel/lab/poc-mfe-vite/public",
+  "cacheDir": "/home/mpopel/lab/poc-mfe-vite/node_modules/.vite",
   "command": "serve",
   "mode": "production",
   "isWorker": false,
@@ -546,7 +549,7 @@
   "esbuild": {
     "jsxDev": false
   },
-  "envDir": "/home/mpopel/lab/mfe-portal/portal-ui-root-min",
+  "envDir": "/home/mpopel/lab/poc-mfe-vite",
   "env": {
     "BASE_URL": "/poc-mfe-vite/",
     "MODE": "production",

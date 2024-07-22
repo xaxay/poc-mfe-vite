@@ -6,7 +6,9 @@
     "build": "vue-tsc --noEmit && vite build",
     "preview": "vite preview"
   },
-  "dependencies": {},
+  "dependencies": {
+    "jwt-decode": "^4.0.0"
+  },
   "devDependencies": {
     "@babel/types": "^7.24.7",
     "@mdi/font": "7.4.47",

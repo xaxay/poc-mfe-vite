@@ -1,5 +1,7 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
 import routesConfig, { RouteDef } from '@browser-module/config/routes';
+import { isLogined } from '@browser-module/api/user';
+
 const baseUrl = import.meta.env.BASE_URL;
 
 const routeEntries: [string, RouteDef][] = Object.entries(routesConfig.routes);
@@ -8,7 +10,7 @@ const routeEntries: [string, RouteDef][] = Object.entries(routesConfig.routes);
 const routes: RouteRecordRaw[] = routeEntries.map(([path, data]) => ({
     path,
     component: () => import(/* @vite-ignore */ data.module),
-    meta: { title: data.title }
+    meta: { title: data.title, requiresAuth: data.requiresAuth === undefined || data.requiresAuth }
 }));
 
 export const defaultRoutePath: string | undefined = routesConfig.defaultPath;
@@ -31,6 +33,11 @@ router.beforeEach((to, from, next) => {
         next(defaultRoutePath || '/');
     } else {
         console.log('[router]', to?.path, '<=', from?.path);
-        next();
+        if (to.meta.requiresAuth && !isLogined()) {
+            console.log('[router] requires auth, redirecting to login, back-url:', to.fullPath);
+            next({ path: '/login', query: { back: to.fullPath } });
+        } else {
+            next();
+        }
     }
 });

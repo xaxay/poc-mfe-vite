@@ -1,50 +1,40 @@
-// !!!! simplified version for testing purposes only !!!!
+// src/api/user.ts
 
-let userLogin : string = '';
-let userPermissions : string[] = [];
+import { useUserStore } from '../stores/userStore';
+import { router } from '@browser-module/router';
 
-export function isGuest() : boolean {
-    return userLogin === '';
+function getUserStore() {
+  return useUserStore();
 }
 
-export function isLogined() : boolean {
-    return userLogin !== '';
+export function isGuest(): boolean {
+  return getUserStore().isGuest();
 }
 
-export function isAdmin() : boolean {
-    return userLogin === 'admin';
+export function isLogined(): boolean {
+  return getUserStore().isLogined();
 }
 
-
-export function getUserLogin() : string {
-    return userLogin;
+export function isAdmin(): boolean {
+  return getUserStore().isAdmin();
 }
 
-
-export async function login(name: string, password : string): Promise<boolean> {
-    
-    // !!!! simplified version for testing purposes only !!!!
-
-    if (name === '' || name !== password) {
-        return false; // wrong user name or password
-    }
-
-    userLogin = name;
-    userPermissions = ['account', 'rumors', 'app4', 'app5', 'app6', 'app7', 'app8', 'app9', 'app10', 'app11', 'app12', 'app13', 'app14', 'app15', 'app16',];
-
-    if (name === 'admin') {
-        userPermissions.push('admin');
-    }
-
-    return true;
+export function getUserLogin(): string {
+  return getUserStore().getLogin();
 }
 
+export async function login(name: string, password: string): Promise<boolean> {
+  return await getUserStore().login(name, password);
+}
 
 export async function logout(): Promise<void> {
-    userLogin = '';
+  await getUserStore().logout();
+  const currentPath = router.currentRoute.value.fullPath;
+  if (currentPath !== '/login') {
+    router.push({ path: '/login', query: { back: currentPath } });
+  }
 }
 
-
-export async function getUserPermissions() : Promise<string[]> {
-    return [...userPermissions]
+export function getUserPermissions(): string[] {
+  return getUserStore().getPermissions();
 }

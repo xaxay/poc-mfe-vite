@@ -5,7 +5,10 @@ import baseUrl from './src/config/baseUrl';
 
 // import vuetify, { transformAssetUrls } from 'vite-plugin-vuetify'
 
-// It is customized version that allows to handle `autoImport: true` for case when import map is reffered to vuetify as single file esm browser module from CDN. 
+
+// It is customized version that allows to handle `autoImport: true` for case 
+// when import map is reffered to vuetify as single file esm browser module from CDN. 
+// and inject CSS into JS
 import vuetify, { transformAssetUrls } from './vite-plugin-vuetify-browser'
 
 import { ImportMapsPlugin } from './vite-plugin-import-maps';
@@ -13,8 +16,6 @@ import { defineConfig } from 'vite'
 import { fileURLToPath, URL } from 'node:url'
 
 import { vueBuildInjectedCss } from './vite-plugin-vue-build-injected-css';
-import chalk from 'chalk';
-import util from 'util';
 import path from 'path';
 import fs from 'fs';
 
@@ -38,7 +39,7 @@ const config = defineConfig((env: ConfigEnv) => {
 
       // https://github.com/vuetifyjs/vuetify-loader/tree/master/packages/vite-plugin#readme
       vuetify({
-        autoImport: false,
+        autoImport: true,
         styles: 'sass',
         injectCSS: true
       }),
