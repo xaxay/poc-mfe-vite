@@ -48,13 +48,9 @@
 <script setup lang="ts">
 import { ref, computed, onMounted, onUnmounted } from 'vue';
 import { useCounterStore } from '@browser-module/stores/counter';
-import routesConfig from '@browser-module/config/routes';
+import routesConfig, { RoutesConfig } from '@browser-module/config/routes';
 import { useRouter, useRoute } from 'vue-router';
 import { getUserLogin, logout, isLogined, getExpiredInSeconds } from '@browser-module/api/user';
-
-interface RouteConfig {
-  title?: string;
-}
 
 const store = useCounterStore();
 
@@ -66,7 +62,7 @@ const route = useRoute();
 const isDashboardPage = computed<boolean>(() => router.currentRoute.value.path === '/dashboard');
 
 const title = computed<string>(() => {
-  const routeDef: RouteConfig | undefined = routesConfig.routes[route.path];
+  const routeDef: RoutesConfig | undefined = routesConfig.routes[route.path];
   return routeDef?.title || '';
 });
 
