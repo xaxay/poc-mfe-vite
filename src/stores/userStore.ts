@@ -57,6 +57,14 @@ export const useUserStore = defineStore('user', {
       const decoded = decodeJWT(this.payload);
       return decoded ? decoded.exp : 0;
     },
+    getExpiredInSeconds(): number {
+      if (this.isExpired()) return 0;
+
+      const expirationTime = this.getExpiredTime();
+      const currentTime = Date.now();
+      const timeRemaining = Math.floor((expirationTime - currentTime)/1000);
+      return timeRemaining > 0 ? timeRemaining : 0;
+    }
   },
   persist: true
 });

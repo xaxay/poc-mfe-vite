@@ -8,4 +8,5 @@ declare module "@browser-module/api/user" {
   export function login(name: string, password: string): Promise<boolean>;
   export function logout(): Promise<void>;
   export function getUserPermissions(): string[];
+  export function getExpiredInSeconds(): number;
 }

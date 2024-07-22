@@ -38,3 +38,8 @@ export async function logout(): Promise<void> {
 export function getUserPermissions(): string[] {
   return getUserStore().getPermissions();
 }
+
+
+export function getExpiredInSeconds(): number {
+  return getUserStore().getExpiredInSeconds();
+}
