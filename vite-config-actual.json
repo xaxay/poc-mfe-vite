@@ -334,11 +334,11 @@
       },
       {
         "find": "@browser-module/ui/login",
-        "replacement": "/src/pages/Login.vue"
+        "replacement": "/src/components/Login.vue"
       },
       {
         "find": "@browser-module/ui/dashboard",
-        "replacement": "/src/pages/Dashboard.vue"
+        "replacement": "/src/components/Dashboard.vue"
       },
       {
         "find": "@browser-module/ui/admin",
@@ -457,8 +457,8 @@
         "@browser-module/stores/counter": "/src/stores/counterStore.ts",
         "@browser-module/api/user": "/src/api/user.ts",
         "@browser-module/ui/header": "/src/components/Header.vue",
-        "@browser-module/ui/login": "/src/pages/Login.vue",
-        "@browser-module/ui/dashboard": "/src/pages/Dashboard.vue",
+        "@browser-module/ui/login": "/src/components/Login.vue",
+        "@browser-module/ui/dashboard": "/src/components/Dashboard.vue",
         "@browser-module/ui/admin": "/src/components/CounterClicker.vue",
         "@browser-module/ui/account": "/src/components/CounterClicker.vue",
         "@browser-module/ui/rumors": "/src/components/CounterClicker.vue",
