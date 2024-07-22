@@ -2,10 +2,24 @@
 
 declare module "@browser-module/config/routes" {
 
-  import { RoutesConfig, RouteDef, RouteDefs } from '../types/routeTypes'
+  export type RouteDefs = {
+    [path: string]: RouteDef;
+  };
+    
+  export type RouteDef = {
+    title: string;
+    module: string;
+    icon?: string;
+    dashboard?: boolean;
+    requiresAuth?: boolean;
+  };
+  
+  export type RoutesConfig = {
+    defaultPath: string,
+    routes: RouteDefs,
+  }
   
   declare const routesConfig: RoutesConfig;
-
   export default routesConfig;
-  export { RoutesConfig, RouteDef, RouteDefs };
+
 }
