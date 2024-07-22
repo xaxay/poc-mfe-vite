@@ -8,7 +8,7 @@ const routesConfig: RoutesConfig = {
   defaultPath: '/dashboard',
 
   routes: {
-    "/login": { title: "Login", icon: "mdi-login", module: `@browser-module/ui/login`, requiresAuth: false},
+    "/login": { title: "Authorization", icon: "mdi-login", module: `@browser-module/ui/login`, requiresAuth: false},
     "/dashboard": { title: "Dashboard", icon: "mdi-view-dashboard", module: `@browser-module/ui/dashboard`},
   
     "/admin": { title: "Administration", icon: "mdi-cog", module: `@browser-module/ui/admin`, dashboard: true},
