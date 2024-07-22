@@ -53,7 +53,7 @@ export default {
           name: data.title,
           icon: data.icon || 'mdi-application',
           path
-        } as );
+        } as App);
       });
 
     const openApp = (route: string) => {

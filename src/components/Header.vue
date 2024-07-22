@@ -49,7 +49,7 @@
 import { ref, computed, onMounted, onUnmounted } from 'vue';
 import { useCounterStore } from '@browser-module/stores/counter';
 import { router } from '@browser-module/router';
-import routesConfig, { RoutesConfig, RouteDef } from '@browser-module/config/routes';
+import routesConfig from '@browser-module/config/routes';
 import { getUserLogin, logout, isLogined, getExpiredInSeconds } from '@browser-module/api/user';
 
 const store = useCounterStore();
