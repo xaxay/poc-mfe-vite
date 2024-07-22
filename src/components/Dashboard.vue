@@ -5,7 +5,7 @@
     <v-text-field v-model="searchQuery" label="Search Apps" flat clearable prepend-inner-icon="mdi-magnify"></v-text-field>
     <div class="app-grid">
       <v-hover v-for="(app, appIndex) in filteredApps" :key="app.name" v-slot:default="{ isHovering, props }">
-        <v-card @click="openApp(app.route)" class="app-card" :elevation="isHovering ? 16 : 2" v-bind="props" :color="appIndex % 2 === 0 ? 'green' : 'blue'">
+        <v-card @click="openApp(app.path)" class="app-card" :elevation="isHovering ? 16 : 2" v-bind="props" :color="appIndex % 2 === 0 ? 'green' : 'blue'">
           <v-card-text class="text-center">
             <div class="icon-circle">
               <v-icon class="app-icon" size="5rem">{{ app.icon }}</v-icon>
@@ -28,7 +28,14 @@ import { getUserPermissions } from '@browser-module/api/user';
 
 export default {
   setup() {
-    const apps : Ref<RouteDef[]> = ref<RouteDef[]>([]);
+
+    type App = {
+      name: string;
+      icon: string;
+      path: string;
+    }
+
+    const apps : Ref<App[]> = ref<App[]>([]);
     const searchQuery = ref<string>('');
 
     const routeEntries: [string, RouteDef][] = Object.entries(routesConfig.routes);
@@ -45,8 +52,8 @@ export default {
         apps.value.push({
           name: data.title,
           icon: data.icon || 'mdi-application',
-          route: path
-        });
+          path
+        } as );
       });
 
     const openApp = (route: string) => {
