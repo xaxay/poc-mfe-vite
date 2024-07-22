@@ -9,8 +9,8 @@
 
     "@browser-module/ui/header": "/src/components/Header.vue",
 
-    "@browser-module/ui/login": "/src/pages/Login.vue",
-    "@browser-module/ui/dashboard": "/src/pages/Dashboard.vue",
+    "@browser-module/ui/login": "/src/components/Login.vue",
+    "@browser-module/ui/dashboard": "/src/components/Dashboard.vue",
 
     "@browser-module/ui/admin": "/src/components/CounterClicker.vue",
     "@browser-module/ui/account": "/src/components/CounterClicker.vue",
