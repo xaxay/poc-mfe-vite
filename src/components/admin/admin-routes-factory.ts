@@ -7,7 +7,7 @@ import { RouteDef } from '@browser-module/config/routes';
 
 
 export function createRouteChildren(parentRouteDef: RouteDef): RouteRecordRaw[] {
-  const title : string = parentRouteDef.title;
+  const titlePrefix : string = parentRouteDef?.title ? `${parentRouteDef.title} - ` : '';
   return [
     {
       path: '',
@@ -17,14 +17,14 @@ export function createRouteChildren(parentRouteDef: RouteDef): RouteRecordRaw[] 
       path: 'search-user',
       component: SearchUser,
       meta: {
-        title: `${title} - Search user`,
+        title: `${titlePrefix}Search user`,
       }
     },
     {
       path: 'user-details',
       component: UserDetails,
       meta: {
-        title: `${title} - User details`,
+        title: `${titlePrefix}User details`,
       }
     },
     {

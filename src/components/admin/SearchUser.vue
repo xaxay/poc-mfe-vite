@@ -26,7 +26,7 @@
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue';
-import { router } from '@browser-module/router';
+import { navigateTo } from '@browser-module/api/nav';
 import { searchUser, User } from './admin-api';
 
 export default defineComponent({
@@ -44,7 +44,7 @@ export default defineComponent({
     };
 
     const goToUserDetails = (name: string) => {
-      router.push({ name: 'UserDetails', params: { name } });
+      navigateTo({ name: 'UserDetails', params: { name } });
     };
 
     return {

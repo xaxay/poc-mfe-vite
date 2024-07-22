@@ -37,7 +37,7 @@
 
 <script lang="ts">
   import { ref } from 'vue';
-  import { router } from '@browser-module/router';
+  import { navigateTo } from '@browser-module/api/nav';
   import { login } from '@browser-module/api/user';
 
   export default {
@@ -56,7 +56,7 @@
         try {
           const success: boolean = await login(name.value, password.value);
           if (success) {
-            router.push(props.redirectTo);
+            navigateTo(props.redirectTo);
           } else {
             errorMessage.value = 'Wrong login and password';
           }

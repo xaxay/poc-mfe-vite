@@ -6,6 +6,7 @@
     "@browser-module/stores/counter": "/src/stores/counterStore.ts",
 
     "@browser-module/api/user": "/src/api/user.ts",
+    "@browser-module/api/nav": "/src/api/nav.ts",
 
     "@browser-module/ui/header": "/src/components/Header.vue",
 

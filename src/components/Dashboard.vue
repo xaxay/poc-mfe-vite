@@ -21,7 +21,7 @@
 
 <script lang="ts">
 import { ref, computed, Ref } from 'vue';
-import { router } from '@browser-module/router';
+import { navigateTo } from '@browser-module/api/nav';
 import routesConfig, { RouteDef } from '@browser-module/config/routes';
 import { getUserPermissions } from '@browser-module/api/user';
 
@@ -57,7 +57,7 @@ export default {
       });
 
     const openApp = (route: string) => {
-      router.push(route);
+      navigateTo(route);
     };
 
     const filteredApps = computed(() => {

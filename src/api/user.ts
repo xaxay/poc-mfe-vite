@@ -1,7 +1,9 @@
 // src/api/user.ts
 
+console.log('[user.ts]')
+
 import { useUserStore } from '../stores/userStore';
-import { router } from '@browser-module/router';
+import { navigateTo, getCurrentRoute } from '@browser-module/api/nav';
 
 function getUserStore() {
   return useUserStore();
@@ -29,9 +31,9 @@ export async function login(name: string, password: string): Promise<boolean> {
 
 export async function logout(): Promise<void> {
   await getUserStore().logout();
-  const currentPath = router.currentRoute.value.fullPath;
+  const currentPath = getCurrentRoute().fullPath;
   if (currentPath !== '/login') {
-    router.push({ path: '/login', query: { back: currentPath } });
+    navigateTo({ path: '/login', query: { back: currentPath } });
   }
 }
 
