@@ -2,7 +2,7 @@
   "base": "/poc-mfe-vite/",
   "plugins": [
     {
-      "name": "vite:build-metadata"
+      "name": "vite:optimized-deps"
     },
     {
       "name": "vite:watch-package-data"
@@ -48,7 +48,7 @@
       "name": "vite:vue",
       "api": {
         "options": {
-          "isProduction": true,
+          "isProduction": false,
           "compiler": null,
           "include": {},
           "customElement": {},
@@ -191,9 +191,9 @@
             }
           },
           "root": "/home/mpopel/lab/poc-mfe-vite",
-          "sourceMap": false,
+          "sourceMap": true,
           "cssDevSourcemap": false,
-          "devToolsEnabled": false
+          "devToolsEnabled": true
         },
         "version": "5.0.5"
       }
@@ -223,23 +223,10 @@
       "name": "vite:css-post"
     },
     {
-      "name": "vite:build-html"
-    },
-    {
       "name": "vite:worker-import-meta-url"
     },
     {
       "name": "vite:asset-import-meta-url"
-    },
-    {
-      "name": "vite:force-systemjs-wrap-complete"
-    },
-    {
-      "name": "commonjs",
-      "version": "26.0.1"
-    },
-    {
-      "name": "vite:data-uri"
     },
     {
       "name": "vite:dynamic-import-vars"
@@ -248,19 +235,13 @@
       "name": "vite:import-glob"
     },
     {
-      "name": "vite:build-import-analysis"
+      "name": "vite:client-inject"
     },
     {
-      "name": "vite:esbuild-transpile"
+      "name": "vite:css-analysis"
     },
     {
-      "name": "vite:terser"
-    },
-    {
-      "name": "vite:reporter"
-    },
-    {
-      "name": "vite:load-fallback"
+      "name": "vite:import-analysis"
     }
   ],
   "define": {
@@ -531,6 +512,12 @@
     },
     "cssMinify": true
   },
+  "optimizeDeps": {
+    "holdUntilCrawlEnd": true,
+    "esbuildOptions": {
+      "preserveSymlinks": false
+    }
+  },
   "ssr": {
     "target": "node",
     "external": [],
@@ -550,40 +537,35 @@
     "/home/mpopel/lab/poc-mfe-vite/vite.config.mts"
   ],
   "inlineConfig": {
-    "build": {}
+    "optimizeDeps": {},
+    "server": {}
   },
   "root": "/home/mpopel/lab/poc-mfe-vite",
   "rawBase": "/poc-mfe-vite/",
   "publicDir": "/home/mpopel/lab/poc-mfe-vite/public",
   "cacheDir": "/home/mpopel/lab/poc-mfe-vite/node_modules/.vite",
-  "command": "build",
-  "mode": "production",
+  "command": "serve",
+  "mode": "development",
   "isWorker": false,
   "mainConfig": null,
   "bundleChain": [],
-  "isProduction": true,
+  "isProduction": false,
   "css": {},
   "esbuild": {
-    "jsxDev": false
+    "jsxDev": true
   },
   "preview": {},
   "envDir": "/home/mpopel/lab/poc-mfe-vite",
   "env": {
     "BASE_URL": "/poc-mfe-vite/",
-    "MODE": "production",
-    "DEV": false,
-    "PROD": true
+    "MODE": "development",
+    "DEV": true,
+    "PROD": false
   },
   "logger": {
     "hasWarned": false
   },
   "packageCache": {},
-  "optimizeDeps": {
-    "holdUntilCrawlEnd": true,
-    "esbuildOptions": {
-      "preserveSymlinks": false
-    }
-  },
   "worker": {
     "format": "iife",
     "rollupOptions": {}

@@ -92,12 +92,12 @@ function generateImports(source, options) {
     if (components.length) {
       const line = `import { components as vuetify_components } from 'vuetify';`;
       code += `\n${line}\n`;
-      console.log(chalk.bold.green("[+]"), chalk.green(line));
+      // console.log(chalk.bold.green("[+]"), chalk.green(line));
     }
     if (directives.length) {
       const line = `import { directives as vuetify_directives } from 'vuetify';`;
       code += `\n${line}\n`;
-      console.log(chalk.bold.green("[+]"), chalk.green(line));
+      // console.log(chalk.bold.green("[+]"), chalk.green(line));
     }
 
     const allComponentImports = components.map(item => `${item.name} : ${item.symbol}`).join(', ');
@@ -106,13 +106,13 @@ function generateImports(source, options) {
     if (allComponentImports) {
       const line = `const { ${allComponentImports} } = vuetify_components;`;
       code += `${line}\n`;
-      console.log(chalk.bold.green("[+]"), chalk.green(line));
+      // console.log(chalk.bold.green("[+]"), chalk.green(line));
     }
 
     if (allDirectiveImports) {
       const line = `const { ${allDirectiveImports} } = vuetify_directives;`;
       code += `${line}\n`;
-      console.log(chalk.bold.green("[+]"), chalk.green(line));
+      // console.log(chalk.bold.green("[+]"), chalk.green(line));
     }
 
     source = [...components, ...directives].reduce((acc, v) => {

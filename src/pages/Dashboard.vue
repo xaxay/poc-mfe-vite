@@ -1,4 +1,4 @@
-// components/PortalDashboard.vue
+// components/Dashboard.vue
 
 <template><v-container fluid>
   <v-text-field v-model="searchQuery" label="Search Apps" flat clearable
@@ -21,7 +21,7 @@
 
 <script>
   import { ref, computed } from 'vue';
-  import { useRouter } from 'vue-router';
+  import { router } from '@browser-module/router';
   import routesConfig from '@browser-module/config/routes';
   import { getUserPermissions } from '@browser-module/api/user';
 
@@ -29,7 +29,6 @@
     setup() {
       const apps = ref([]);
       const searchQuery = ref('');
-      const router = useRouter();
   
       const routeEntries = Object.entries(routesConfig.routes);
 

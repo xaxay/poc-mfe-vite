@@ -7,7 +7,7 @@ import { resolve, basename, join } from 'path';
 import chalk from 'chalk';
 import { NormalizedOutputOptions, OutputBundle, PreRenderedAsset, PreRenderedChunk } from 'rollup';
 import baseUrl from './src/config/baseUrl';
-console.log('baseUrl:', baseUrl);
+// console.log('[vite-plugin-import-maps] baseUrl:', baseUrl);
 
 
 export interface ImportMapsConfig {
@@ -37,7 +37,7 @@ function loadImportMapFiles(devMode: boolean, config: ImportMapsConfig): ImportM
     importMapFiles.push(modulesImportMapFile);
   }
 
-  console.log('[vite-plugin-import-maps] import-map=files=', importMapFiles, 'devMode=', devMode);
+  console.log(`[vite-plugin-import-maps] baseUrl:${baseUrl} import-map-files:${importMapFiles} devMode:${devMode}`);
 
   const importMaps: ImportMap[] = [];
   for (const filename of importMapFiles) {
@@ -80,7 +80,7 @@ export function ImportMapsPlugin(config: ImportMapsConfig = {
     type: 'importmap',
   },
 }): Plugin {
-  console.log('[vite-plugin-import-maps] ImportMapsPlugin.init ...');
+  // console.log('[vite-plugin-import-maps] ImportMapsPlugin.init ...');
 
   let devMode = true;
 

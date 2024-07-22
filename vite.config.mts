@@ -52,7 +52,7 @@ const config = defineConfig((env: ConfigEnv) => {
           // const outputPath = path.resolve(__dirname, `vite-config-${env.command === 'serve' ? 'dev' : 'build'}-actual.json`);
           const outputPath = path.resolve(__dirname, `vite-config-actual.json`);
           fs.writeFileSync(outputPath, JSON.stringify(config, null, 2));
-          console.log(`Resolved Vite configuration has been written to ${outputPath}`);
+          console.log(`Result Vite configuration has been written to ${outputPath}`);
         }
       } as Plugin,
     ],

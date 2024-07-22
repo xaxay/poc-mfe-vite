@@ -1,3 +1,5 @@
+// components/Header.vue
+
 <template>
   <v-app-bar app>
     <v-img src="@/assets/logo.svg" alt="Logo" class="logo" max-width="5rem"></v-img>
@@ -30,7 +32,7 @@
       <v-btn icon @click="logout" class="mx-4">
         <v-avatar>
           <v-icon>{{ userIcon }}</v-icon>
-          <v-tooltip activator="parent" location="bottom" content-class="tooltip-center">
+          <v-tooltip activator="parent" location="bottom">
             <b>{{ userName }}</b>
             <br>Expired in: {{ expiredInSecs }} seconds.
             <br/>Click to logout
@@ -43,44 +45,50 @@
   </v-app-bar>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref, computed, onMounted, onUnmounted } from 'vue';
 import { useCounterStore } from '@browser-module/stores/counter';
 import routesConfig from '@browser-module/config/routes';
-import { router } from '@browser-module/router';
+import { useRouter, useRoute } from 'vue-router';
 import { getUserLogin, logout, isLogined, getExpiredInSeconds } from '@browser-module/api/user';
+
+interface RouteConfig {
+  title?: string;
+}
 
 const store = useCounterStore();
 
-const userIcon = ref('mdi-account');
+const userIcon = ref<string>('mdi-account');
 
-const isDashboardPage = computed(() => router.currentRoute.value.path === '/dashboard');
+const router = useRouter();
+const route = useRoute();
 
-const title = computed(() => {
-  const route = router.currentRoute.value;
-  const routeDef = routesConfig.routes[route?.path];
-  return routeDef?.title || ''
+const isDashboardPage = computed<boolean>(() => router.currentRoute.value.path === '/dashboard');
+
+const title = computed<string>(() => {
+  const routeDef: RouteConfig | undefined = routesConfig.routes[route.path];
+  return routeDef?.title || '';
 });
 
-const counter = computed(() => store.counter);
+const counter = computed<number>(() => store.counter);
 
-const userName = computed(() => getUserLogin());
+const userName = computed<string>(() => getUserLogin());
 
-const logined = computed(() => isLogined());
+const logined = computed<boolean>(() => isLogined());
 
-const expiredInSecs = ref(getExpiredInSeconds());
+const expiredInSecs = ref<number>(getExpiredInSeconds());
 
-const updateExpiredInSecs = () => {
+const updateExpiredInSecs = (): void => {
   expiredInSecs.value = getExpiredInSeconds();
 };
 
-const goToDashboard = () => {
+const goToDashboard = (): void => {
   router.push('/dashboard');
 };
 
-onMounted(() => {
+onMounted((): void => {
   const interval = setInterval(updateExpiredInSecs, 1000); // Update every second
-  onUnmounted(() => {
+  onUnmounted((): void => {
     clearInterval(interval);
   });
 });
@@ -93,9 +101,5 @@ onMounted(() => {
 
 .title {
   font-size: 1.5rem;
-}
-
-.tooltip-center .v-tooltip__content {
-  text-align: center;
 }
 </style>
