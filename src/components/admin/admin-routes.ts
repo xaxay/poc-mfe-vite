@@ -1,4 +1,4 @@
-// components/admin/admin-routes-factory.ts
+// components/admin/admin-routes.ts
 
 import { RouteRecordRaw } from 'vue-router';
 import SearchUser from './SearchUser.vue';
@@ -11,17 +11,20 @@ export function createRouteChildren(parentRouteDef: RouteDef): RouteRecordRaw[] 
   return [
     {
       path: '',
-      redirect: 'search-user',
-    },
-    {
-      path: 'search-user',
       component: SearchUser,
       meta: {
         title: `${titlePrefix}Search user`,
       }
     },
     {
-      path: 'user-details',
+      path: 'users',
+      component: SearchUser,
+      meta: {
+        title: `${titlePrefix}Search user`,
+      }
+    },
+    {
+      path: 'users/:name',
       component: UserDetails,
       meta: {
         title: `${titlePrefix}User details`,

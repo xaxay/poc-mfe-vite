@@ -100,7 +100,7 @@ function generatePayload(name: string): string {
         'account', 'rumors', 'app4', 'app5', 'app6', 'app7', 'app8', 'app9', 
         ...(name === 'admin' ? ['admin'] : [])
     ],
-    exp: Date.now() + 60000
+    exp: Date.now() + 10*60000
   };
   return btoa(JSON.stringify(payload)); 
 }

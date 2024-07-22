@@ -7,7 +7,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 
-import { createRouteChildren } from './admin-routes-factory';
+import { createRouteChildren } from './admin-routes';
 
 export default defineComponent({
   name: 'Admin'

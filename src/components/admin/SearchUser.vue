@@ -1,24 +1,23 @@
-// components/admin/SearchUser.vue
+// components/admin/searchUser.vue
 
 <template>
   <v-container fluid>
     <v-text-field 
       v-model="searchQuery" 
-      label="Search Users" 
+      label="Input user name" 
       flat 
       clearable 
       prepend-inner-icon="mdi-magnify"
       @input="searchUsers"
     ></v-text-field>
+    Found users: 
     <v-list>
       <v-list-item 
         v-for="user in users" 
         :key="user.name" 
         @click="goToUserDetails(user.name)"
       >
-        <v-list-item-content>
-          <v-list-item-title>{{ user.name }}</v-list-item-title>
-        </v-list-item-content>
+        <v-list-item-title>{{ user.name }}</v-list-item-title>
       </v-list-item>
     </v-list>
   </v-container>
@@ -44,7 +43,7 @@ export default defineComponent({
     };
 
     const goToUserDetails = (name: string) => {
-      navigateTo({ name: 'UserDetails', params: { name } });
+      navigateTo({ path: `/admin/users/${name}` });
     };
 
     return {
@@ -56,3 +55,4 @@ export default defineComponent({
   }
 });
 </script>
+

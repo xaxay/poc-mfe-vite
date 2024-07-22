@@ -53,7 +53,7 @@ async function registerRoutes() {
                 };
             }
 
-            console.log(`[registerRoutes] Registered route with children: ${path}`);
+            console.log(`[registerRoutes] Registered route with children: ${path}`, children);
             return {
                 path,
                 component: module.default,
