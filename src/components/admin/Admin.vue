@@ -1,10 +1,6 @@
 <template>
   <v-app>
-    <v-navigation-drawer
-      v-model="drawer"
-      app
-      permanent
-    >
+    <v-navigation-drawer v-model="drawer" app permanent>
       <v-list dense>
         <v-list-item
           v-for="(item, index) in items"
@@ -16,7 +12,7 @@
           <template v-slot:prepend>
             <v-icon>{{ item.icon }}</v-icon>
           </template>
-          <v-list-item-title>{{ item.title }}</v-list-item-title>
+          <v-list-item-title>{{ getTitle(item) }}</v-list-item-title>
         </v-list-item>
       </v-list>
     </v-navigation-drawer>
@@ -37,7 +33,7 @@ export default defineComponent({
   name: 'Admin',
   setup() {
     const drawer = ref(true);
-
+    const userLogin = getUserLogin();
 
     type NavItemDef = {
       title: string,
@@ -45,7 +41,8 @@ export default defineComponent({
       exact: boolean;
       path: string;
       alias?: string;
-      pathClcik?: string
+      pathClcik?: string;
+      altTitle?: string;
     };
 
     const items = computed(() => [
@@ -61,10 +58,10 @@ export default defineComponent({
         icon: 'mdi-account-outline', 
         exact: false,
         path: `/admin/users/details/`,
-        pathClcik: `/admin/users/details/${getUserLogin()}`
+        pathClcik: `/admin/users/details/${userLogin}`,
+        altTitle: 'User (Me)'
       },
     ] as NavItemDef[]);
-
 
     function isActive(item: NavItemDef): boolean {
       const path = getCurrentRoute().path;
@@ -88,10 +85,19 @@ export default defineComponent({
       return false;
     }
 
+    function getTitle(item: NavItemDef): string {
+      const currentPath = getCurrentRoute().path;
+      if (item.pathClcik) {
+        return currentPath === item.pathClcik ? item.altTitle || item.title : item.title;
+      }
+      return item.title;
+    }
+
     return {
       drawer,
       items,
       isActive,
+      getTitle,
     };
   },
 });
