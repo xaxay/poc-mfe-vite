@@ -3,8 +3,6 @@ import { createRouter, createWebHistory, RouteMeta, RouteRecordRaw, RouteRecordS
 import routesConfig, { RouteDef } from '@browser-module/config/routes';
 import { isLogined } from '@browser-module/api/user';
 
-console.log('[router.ts]');
-
 const baseUrl = import.meta.env.BASE_URL;
 
 // Use empty router to make possible to resolve circular imports
@@ -33,7 +31,7 @@ async function dynamicImportModule(path: string) {
 
 // Define and register routes
 async function registerRoutes() {
-    console.log('[router] initializing ...');
+    console.log('[router.ts] initializing ...');
     const routes: RouteRecordRaw[] = await Promise.all(routeEntries.map(async ([path, routeDef]) => {
         const module = await dynamicImportModule(routeDef.module);
         
@@ -52,7 +50,7 @@ async function registerRoutes() {
                 };
             }
 
-            console.log(`[router] route with children: ${path}`, children);
+            console.log(`[router.ts] route module with children loaded: ${path}`, children);
             return {
                 path,
                 component: module.default,
@@ -60,7 +58,7 @@ async function registerRoutes() {
             } as RouteRecordSingleViewWithChildren;
         }
 
-        console.log(`[router] route: ${path}`);
+        console.log(`[router.ts] route module loaded: ${path}`);
         return {
             path,
             component: module.default,
@@ -73,27 +71,27 @@ async function registerRoutes() {
     if (defaultRoutePath) {
         const defaultRoute = { path: '/:pathMatch(.*)*', redirect: defaultRoutePath };
         router.addRoute(defaultRoute);
-        console.log('[router] default route:', defaultRoute);
+        console.log('[router.ts] default route:', defaultRoute);
     }
 
     routes.forEach(route => router.addRoute(route));
 
     router.beforeEach((to, from, next) => {
       if (to.matched.length === 0) {
-        console.log('[router] Unknown path:', to.path, 'redirecting to default path:', routesConfig.defaultPath || '/');
+        console.log('[router.ts] Unknown path:', to.path, 'redirecting to default path:', routesConfig.defaultPath || '/');
         next(routesConfig.defaultPath || '/');
       } else {
           if (to.meta.requiresAuth && !isLogined()) {
-            console.log('[router] Requires auth, redirecting to login, back-url:', to.fullPath);
+            console.log('[router.ts] Requires auth, redirecting to login, back-url:', to.fullPath);
             next({ path: '/login', query: { back: to.fullPath } });
           } else {
-            console.log('[router] Navigation from:', from.path, 'to:', to.path);
+            console.log('[router.ts] Navigation from:', from.path, 'to:', to.path);
             next();
           }
       }
   });
 
-    console.log('[router] initialized', '\nroutes to add:', routes, '\nrouter state:', router.getRoutes());
+    console.log('[router.ts] initialized', '\nroutes to add:', routes, '\nrouter state:', router.getRoutes());
 }
 
 

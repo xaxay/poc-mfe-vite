@@ -67,21 +67,21 @@ export default defineComponent({
       const path = getCurrentRoute().path;
       if (item.exact) {
         if (path === item.path) {
-          console.log('[active nav-item] #path', item.path, path);
+          // console.log('[active nav-item] #path', item.path, path);
           return true;
         }
         if (!!item.alias && path === item.alias) {
-          console.log('[active nav-item] #alias', item.alias, path);
+          // console.log('[active nav-item] #alias', item.alias, path);
           return true;
         }
-        console.log('[non-active nav-item]', item.path, path);
+        // console.log('[non-active nav-item]', item.path, path);
         return false;
       }
       if (path.startsWith(item.path)) {
-        console.log('[active nav-item] #startsWith', item.path, path);
+        // console.log('[active nav-item] #startsWith', item.path, path);
         return true;
       }
-      console.log('[non-active nav-item] #notStartsWith', item.path, path);
+      // console.log('[non-active nav-item] #notStartsWith', item.path, path);
       return false;
     }
 
