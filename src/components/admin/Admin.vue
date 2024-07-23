@@ -45,18 +45,21 @@ export default defineComponent({
   setup() {
     const drawer = ref(true);
     const userLogin = getUserLogin();
-    const isLargeScreen = ref(window.innerWidth >= 1024);
 
-    const updateScreenSize = () => {
-      isLargeScreen.value = window.innerWidth >= 1024;
+    const isLargeScreen = ref(false);
+
+    const updateIsLargeScreen = () => {
+      const remInPixels = parseFloat(getComputedStyle(document.documentElement).fontSize);
+      isLargeScreen.value = window.innerWidth >= remInPixels * 40;
     };
 
     onMounted(() => {
-      window.addEventListener('resize', updateScreenSize);
+      updateIsLargeScreen();
+      window.addEventListener('resize', updateIsLargeScreen);
     });
 
     onBeforeUnmount(() => {
-      window.removeEventListener('resize', updateScreenSize);
+      window.removeEventListener('resize', updateIsLargeScreen);
     });
 
     type NavItemDef = {
