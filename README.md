@@ -12,7 +12,7 @@ For simplicity, all modules are independent, but located in one repo. Multi repo
 
 # Demo
 
-[Click to see Demo](https://xaxay.github.io/poc-mfe-vite/)
+[Click to see Demo](https://xaxay.github.io/poc-mfe-vite/)  ( use admin/admin or any login with same password)
 
 It proves that it works and demonstrate how all these parts are initialized and interacted together from different in-browser modules!
 
