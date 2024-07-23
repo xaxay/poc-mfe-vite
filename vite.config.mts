@@ -79,6 +79,10 @@ const config = defineConfig((env: ConfigEnv) => {
       historyApiFallback: true
     },
 
+    preview: {
+      port: 4000,
+    },
+
     build: {
       // minify: false,
 
