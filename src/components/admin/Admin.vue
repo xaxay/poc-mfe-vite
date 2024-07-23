@@ -28,7 +28,7 @@
       </v-list>
     </v-navigation-drawer>
 
-    <v-container>
+    <v-container fluid>
       <router-view></router-view>
     </v-container>
   </v-container>
@@ -36,20 +36,21 @@
 
 <script lang="ts">
 import { defineComponent, ref, computed, onMounted, onBeforeUnmount } from 'vue';
+import { createRouteChildren } from './admin-routes';
 import { getUserLogin } from '@browser-module/api/user';
 import { getCurrentRoute } from '@browser-module/api/nav';
 
 export default defineComponent({
   name: 'Admin',
   setup() {
-    const drawer = ref(true);
+    const drawer = ref(false);
     const userLogin = getUserLogin();
 
     const isLargeScreen = ref(false);
 
     const updateIsLargeScreen = () => {
       const remInPixels = parseFloat(getComputedStyle(document.documentElement).fontSize);
-      isLargeScreen.value = window.innerWidth >= remInPixels * 40;
+      isLargeScreen.value = window.innerWidth >= remInPixels * 32;
     };
 
     onMounted(() => {
@@ -128,6 +129,8 @@ export default defineComponent({
     };
   },
 });
+
+export { createRouteChildren };
 </script>
 
 <style scoped>
