@@ -1,7 +1,7 @@
 <!-- /src/components/admin/Admin.vue -->
 
 <template>
-  <v-app>
+  <v-container fluid>
     <v-app-bar app>
       <v-app-bar-nav-icon @click="toggleDrawer"></v-app-bar-nav-icon>
       <v-toolbar-title>Admin Panel</v-toolbar-title>
@@ -28,15 +28,14 @@
       </v-list>
     </v-navigation-drawer>
 
-    <v-main>
+    <v-container>
       <router-view></router-view>
-    </v-main>
-  </v-app>
+    </v-container>
+  </v-container>
 </template>
 
 <script lang="ts">
 import { defineComponent, ref, computed, onMounted, onBeforeUnmount } from 'vue';
-import { createRouteChildren } from './admin-routes';
 import { getUserLogin } from '@browser-module/api/user';
 import { getCurrentRoute } from '@browser-module/api/nav';
 
@@ -129,8 +128,6 @@ export default defineComponent({
     };
   },
 });
-
-export { createRouteChildren };
 </script>
 
 <style scoped>
