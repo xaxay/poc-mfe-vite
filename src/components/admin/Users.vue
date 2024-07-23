@@ -10,16 +10,21 @@
       prepend-inner-icon="mdi-magnify"
       @input="searchUsers"
     ></v-text-field>
-    Found users: 
-    <v-list>
-      <v-list-item 
-        v-for="user in users" 
-        :key="user.name" 
-        @click="goToUserDetails(user.name)"
-      >
-        <v-list-item-title>{{ user.name }}</v-list-item-title>
-      </v-list-item>
-    </v-list>
+    <template v-if="users.length">
+      Found user{{ users.length > 1 ? 's' : '' }}
+      <template v-if="users.length > 1 || !users.map(u => u.name).includes(searchQuery)">
+        with name like *{{ searchQuery }}*
+      </template>
+      <v-list>
+        <v-list-item 
+          v-for="user in users" 
+          :key="user.name" 
+          @click="goToUserDetails(user.name)"
+        >
+          <v-list-item-title>{{ user.name }}</v-list-item-title>
+        </v-list-item>
+      </v-list>
+    </template>
   </v-container>
 </template>
 
@@ -43,7 +48,7 @@ export default defineComponent({
     };
 
     const goToUserDetails = (name: string) => {
-      navigateTo({ path: `/admin/users/${name}` });
+      navigateTo({ path: `/admin/users/details/${name}` });
     };
 
     return {

@@ -24,7 +24,13 @@ export const searchUser = async (nameLike: string) : Promise<User[]> => {
     return [];
   }
 
-  return [ { name: nameLike} ];
+  const result = [{ name: nameLike }];
+
+  if (nameLike !== currentUserName && currentUserName.includes(nameLike)) {
+    result.unshift({ name: currentUserName });
+  }  
+
+  return result;
 }
 
 // Mock

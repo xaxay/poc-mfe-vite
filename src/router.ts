@@ -96,7 +96,7 @@ async function registerRoutes() {
       }
   });
 
-    console.log('[registerRoutes] Finished');
+    console.log('[registerRoutes] Finished', router.getRoutes());
 }
 
 
