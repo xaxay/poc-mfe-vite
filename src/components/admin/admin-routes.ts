@@ -3,15 +3,10 @@
 import { RouteRecordRaw } from 'vue-router';
 import Users from './Users.vue';
 import UserDetails from './UserDetails.vue';
-import { RouteDef } from '@browser-module/config/routes';
 
 
-export function createRouteChildren(parentRouteDef: RouteDef): RouteRecordRaw[] {
+export function createRouteChildren(path: string): RouteRecordRaw[] {
   return [
-    // {
-    //   path: '',
-    //   redirect: 'users',
-    // },
     {
       path: 'users',
       component: Users,
@@ -23,7 +18,7 @@ export function createRouteChildren(parentRouteDef: RouteDef): RouteRecordRaw[] 
     },
     {
       path: ':pathMatch(.*)*',
-      redirect: 'users'
+      redirect: `${path}/users`
     }
   ];
 }

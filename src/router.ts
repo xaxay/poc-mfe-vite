@@ -20,13 +20,12 @@ const importedModules: Record<string, any> = {};
 
 // Function to dynamically import modules
 async function dynamicImportModule(path: string) {
-    console.log(`[dynamicImportModule] Attempting to import: ${path}`);
     if (!importedModules[path]) {
         try {
             importedModules[path] = await import(/* @vite-ignore */ path);
-            console.log(`[dynamicImportModule] Successfully imported: ${path}`);
         } catch (error) {
-            console.error(`[dynamicImportModule] Failed to import: ${path}`, error);
+            console.error(`[dynamicImport] Failed: ${path}`, error);
+            throw error;
         }
     }
     return importedModules[path];
@@ -34,17 +33,17 @@ async function dynamicImportModule(path: string) {
 
 // Define and register routes
 async function registerRoutes() {
-    console.log('[registerRoutes] Started');
-    const routes: RouteRecordRaw[] = await Promise.all(routeEntries.map(async ([path, data]) => {
-        const module = await dynamicImportModule(data.module);
+    console.log('[router] initializing ...');
+    const routes: RouteRecordRaw[] = await Promise.all(routeEntries.map(async ([path, routeDef]) => {
+        const module = await dynamicImportModule(routeDef.module);
         
         const meta: RouteMeta = { 
-            title: data.title, 
-            requiresAuth: data.requiresAuth === undefined || data.requiresAuth 
+            title: routeDef.title, 
+            requiresAuth: routeDef.requiresAuth === undefined || routeDef.requiresAuth 
         };
 
         if (module.createRouteChildren) {
-            const children: RouteRecordRaw[] = module.createRouteChildren();
+            const children: RouteRecordRaw[] = module.createRouteChildren(path);
             
             for (const child of children) {
                 child.meta = {
@@ -53,7 +52,7 @@ async function registerRoutes() {
                 };
             }
 
-            console.log(`[registerRoutes] Registered route with children: ${path}`, children);
+            console.log(`[router] route with children: ${path}`, children);
             return {
                 path,
                 component: module.default,
@@ -61,42 +60,40 @@ async function registerRoutes() {
             } as RouteRecordSingleViewWithChildren;
         }
 
-        console.log(`[registerRoutes] Registered route: ${path}`);
+        console.log(`[router] route: ${path}`);
         return {
             path,
             component: module.default,
-            meta
+            meta,
         } as RouteRecordSingleView;
     }));
-
-    routes.forEach(route => router.addRoute(route));
-    console.log('[registerRoutes] Routes added to router:', routes);
 
     // Add the default redirect route
     const defaultRoutePath = routesConfig.defaultPath;
     if (defaultRoutePath) {
         const defaultRoute = { path: '/:pathMatch(.*)*', redirect: defaultRoutePath };
         router.addRoute(defaultRoute);
-        console.log('[registerRoutes] Default redirect route added:', defaultRoute);
+        console.log('[router] default route:', defaultRoute);
     }
 
+    routes.forEach(route => router.addRoute(route));
+
     router.beforeEach((to, from, next) => {
-      console.log('[router.beforeEach] Navigation from:', from.path, 'to:', to.path);
       if (to.matched.length === 0) {
-          console.log('[router.beforeEach] Unknown path:', to.path, 'redirecting to default path:', routesConfig.defaultPath || '/');
-          next(routesConfig.defaultPath || '/');
+        console.log('[router] Unknown path:', to.path, 'redirecting to default path:', routesConfig.defaultPath || '/');
+        next(routesConfig.defaultPath || '/');
       } else {
           if (to.meta.requiresAuth && !isLogined()) {
-              console.log('[router.beforeEach] Requires auth, redirecting to login, back-url:', to.fullPath);
-              next({ path: '/login', query: { back: to.fullPath } });
+            console.log('[router] Requires auth, redirecting to login, back-url:', to.fullPath);
+            next({ path: '/login', query: { back: to.fullPath } });
           } else {
-              console.log('[router.beforeEach] Navigation allowed:', to.path);
-              next();
+            console.log('[router] Navigation from:', from.path, 'to:', to.path);
+            next();
           }
       }
   });
 
-    console.log('[registerRoutes] Finished', router.getRoutes());
+    console.log('[router] initialized', '\nroutes to add:', routes, '\nrouter state:', router.getRoutes());
 }
 
 

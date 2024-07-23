@@ -8,10 +8,10 @@ let routerInstanse: Router | null = null;
 
 
 async function loadRouter(): Promise<void> {
-  console.log('importing @browser-module/router')
+  console.log('Started dynamic import of @browser-module/router')
   const { router } = await import('@browser-module/router');
   routerInstanse = router; 
-  console.log('imported @browser-module/router')
+  console.log('Finished dynamic import of @browser-module/router')
 }
 
 loadRouter();
@@ -30,4 +30,8 @@ export function getCurrentRoute() : RouteLocationNormalizedLoaded {
     throw new Error("router is not loaded yet");
   }
   return routerInstanse.currentRoute.value;
+}
+
+export function join(...paths: string[]): string {
+  return paths.map(path => path.replace(/\/+$/, '').replace(/^\/+/, '')).join('/');
 }
