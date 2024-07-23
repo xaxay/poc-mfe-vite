@@ -107,9 +107,15 @@ export function ImportMapsPlugin(config: ImportMapsConfig = {
 
     externalDependencies = Object.keys(importMap.imports);
 
-    inputs = {
-      index: resolve(__dirname, 'index.html')
-    };
+    inputs = {};
+
+    const indexPath = resolve('index.html');
+    if (existsSync(indexPath)) {
+      console.log(`[vite-plugin-import-maps] adding entry point: ${indexPath}`);
+      inputs.index = indexPath;
+    } else {
+      console.log(`[vite-plugin-import-maps] skipping entry point: ${indexPath}`);
+    }
 
     Object.entries(importMap.imports).forEach(([k, v]) => {
       if (v.startsWith('http://') || v.startsWith('https://')) {
