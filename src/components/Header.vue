@@ -46,27 +46,22 @@
 </template>
 
 <script setup lang="ts">
+
+console.log('[Header.vue] setup started');
+
 import { ref, computed, onMounted, onUnmounted } from 'vue';
 import { useCounterStore } from '@browser-module/stores/counter';
-import { getCurrentRoute, getDefaultPath, navigateTo } from '@browser-module/api/nav';
+import { getRouter, getCurrentRoute, getDefaultPath, navigateTo, onRouterLoaded } from '@browser-module/api/nav';
 import { getUserLogin, logout, isLogined, getExpiredInSeconds } from '@browser-module/api/user';
 
 const store = useCounterStore();
 
 const userIcon = ref<string>('mdi-account');
-
-const isDashboardPage = computed<boolean>(() => getCurrentRoute().path === getDefaultPath());
-
-const title = computed<string>((): string => {
-  return getCurrentRoute().meta.title as string || '';
-});
-
+const isDashboardPage = ref<boolean>(false);
+const title = ref<string>('');
 const counter = computed<number>(() => store.counter);
-
 const userName = computed<string>(() => getUserLogin());
-
 const logined = computed<boolean>(() => isLogined());
-
 const expiredInSecs = ref<number>(getExpiredInSeconds());
 
 const updateExpiredInSecs = (): void => {
@@ -77,12 +72,33 @@ const goToDashboard = (): void => {
   navigateTo('/dashboard');
 };
 
+const updateRouteInfo = (): void => {
+  const currentRoute = getCurrentRoute();
+  isDashboardPage.value = currentRoute.path === getDefaultPath();
+  title.value = currentRoute.meta.title as string || '';
+  console.log('[Header.vue] updateRouteInfo.', currentRoute.path,
+    'currentRoute:', currentRoute);
+};
+
+
+onRouterLoaded(router => {
+  updateRouteInfo();
+  getRouter().afterEach(() => {
+    console.log('[Header.vue] router afterEach');
+    updateRouteInfo();
+  });
+});
+
 onMounted((): void => {
+  console.log('[Header.vue] mounted');
   const interval = setInterval(updateExpiredInSecs, 1000); // Update every second
   onUnmounted((): void => {
     clearInterval(interval);
   });
 });
+
+console.log('[Header.vue] setup ended');
+
 </script>
 
 <style scoped>

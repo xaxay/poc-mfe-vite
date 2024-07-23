@@ -462,6 +462,9 @@
       ]
     }
   },
+  "preview": {
+    "port": 4000
+  },
   "build": {
     "target": "esnext",
     "cssTarget": "esnext",
@@ -571,7 +574,6 @@
   "esbuild": {
     "jsxDev": false
   },
-  "preview": {},
   "envDir": "/home/mpopel/lab/poc-mfe-vite",
   "env": {
     "BASE_URL": "/poc-mfe-vite/",
