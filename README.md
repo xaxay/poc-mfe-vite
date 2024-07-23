@@ -1,4 +1,4 @@
-# [Phase-2] Distributed Pure Single Page Application (SPA): Proof of Concept
+# [Phase-2] Distributed (SingleRepo) Rich Single Page Application (SPA): Proof of Concept
 
 ## Introduction
 
