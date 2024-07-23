@@ -48,15 +48,14 @@
 <script setup lang="ts">
 import { ref, computed, onMounted, onUnmounted } from 'vue';
 import { useCounterStore } from '@browser-module/stores/counter';
-import { getCurrentRoute, navigateTo } from '@browser-module/api/nav';
-import routesConfig from '@browser-module/config/routes';
+import { getCurrentRoute, getDefaultPath, navigateTo } from '@browser-module/api/nav';
 import { getUserLogin, logout, isLogined, getExpiredInSeconds } from '@browser-module/api/user';
 
 const store = useCounterStore();
 
 const userIcon = ref<string>('mdi-account');
 
-const isDashboardPage = computed<boolean>(() => getCurrentRoute().path === routesConfig.defaultPath);
+const isDashboardPage = computed<boolean>(() => getCurrentRoute().path === getDefaultPath());
 
 const title = computed<string>((): string => {
   return getCurrentRoute().meta.title as string || '';

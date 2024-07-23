@@ -3,6 +3,7 @@
 console.log('[nav.ts]')
 
 import { RouteLocationNormalizedLoaded, RouteLocationRaw, Router, createRouter, createWebHistory } from 'vue-router';
+import routesConfig from '@/config/routes';
 
 let routerInstanse: Router | null = null;
 
@@ -33,6 +34,10 @@ export function getCurrentRoute() : RouteLocationNormalizedLoaded {
     return staticRouter.currentRoute.value;
   }
   return routerInstanse.currentRoute.value;
+}
+
+export function getDefaultPath() : string {
+  return routesConfig.defaultPath;
 }
 
 export function join(...paths: string[]): string {
