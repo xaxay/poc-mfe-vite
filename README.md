@@ -8,6 +8,8 @@ It is full-fledged development version that is bases on
 
 Vite / ImportMaps / HTML / JS / CSS / Vue3 / Vuetify3 / Pinia.
 
+For simplicity, all modules are independent, but located in one repo. Multi repo version see in [POC Distributed SPA : Phase-3](https://github.com/xaxay/poc-mfe-vite-root).
+
 # Demo
 
 [Click to see Demo](https://xaxay.github.io/poc-mfe-vite/)
