@@ -1,4 +1,4 @@
-// stores/userStore.ts
+// /srcstores/userStore.ts
 import { defineStore } from 'pinia';
 
 interface UserState {

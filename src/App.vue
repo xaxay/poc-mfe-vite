@@ -1,3 +1,5 @@
+<!-- /src/App.vue -->
+
 <template>
  <v-app>
       <header-component/>

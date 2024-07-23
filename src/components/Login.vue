@@ -1,4 +1,4 @@
-// components/Login.vue
+<!-- /src/components/Login.vue -->
 
 <template>
   <v-container class="fill-height" fluid>

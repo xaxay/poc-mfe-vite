@@ -1,4 +1,4 @@
-// components/Dashboard.vue
+<!-- /src/components/Dashboard.vue -->
 
 <template>
   <v-container fluid>

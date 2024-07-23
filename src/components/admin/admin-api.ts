@@ -1,4 +1,4 @@
-// components/admin/admin-api.ts
+// /src/components/admin/admin-api.ts
 
 import { getUserLogin } from "@browser-module/api/user";
 

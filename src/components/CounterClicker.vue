@@ -1,4 +1,4 @@
-// components/PortalPluginStub.vue
+<!-- /src/components/PortalPluginStub.vue -->
 
 <template><v-container fluid>
     <h1>{{ appName }}</h1>

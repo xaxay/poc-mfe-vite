@@ -1,4 +1,4 @@
-// utils/nav.ts
+// src/utils/nav.ts
 
 console.log('[nav.ts]')
 

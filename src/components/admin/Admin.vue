@@ -1,3 +1,5 @@
+<!-- /src/components/admin/Admin.vue -->
+
 <template>
   <v-app>
     <v-navigation-drawer v-model="drawer" app permanent>

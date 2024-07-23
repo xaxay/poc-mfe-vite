@@ -1,4 +1,4 @@
-// src/shims/shim-api-nav.d.ts
+// /src/shims/shim-api-nav.d.ts
 
 declare module "@browser-module/api/nav" {
   import { RouteLocationRaw, RouteLocationNormalizedLoaded } from 'vue-router';

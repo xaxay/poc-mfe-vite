@@ -1,4 +1,4 @@
-// src/shims/shim-api-user.d.ts
+// /src/shims/shim-api-user.d.ts
 
 declare module "@browser-module/api/user" {
   export function isGuest(): boolean;

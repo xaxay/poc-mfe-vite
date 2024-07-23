@@ -1,3 +1,5 @@
+<!-- /src/components/admin/UserDetails.vue -->
+
 <template>
   <div>
     <p>Name: {{ name }}</p>
@@ -7,6 +9,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 import { useRoute } from 'vue-router';
+import { getUserDetails } from './admin-api';
 
 export default defineComponent({
   name: 'UserDetails',

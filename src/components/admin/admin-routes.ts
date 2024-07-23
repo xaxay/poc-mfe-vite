@@ -1,4 +1,4 @@
-// components/admin/admin-routes.ts
+// /src/components/admin/admin-routes.ts
 
 import { RouteRecordRaw } from 'vue-router';
 import Users from './Users.vue';

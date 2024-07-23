@@ -1,4 +1,4 @@
-// components/Header.vue
+<!-- /src/components/Header.vue -->
 
 <template>
   <v-app-bar app>
