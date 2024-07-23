@@ -1,4 +1,4 @@
-// /src/shims/shim-routes.d.ts
+// src/shims/shim-routes.d.ts
 
 declare module "@browser-module/config/routes" {
 

@@ -1,4 +1,4 @@
-// /src/api/user.ts
+// src/api/user.ts
 
 console.log('[user.ts]')
 

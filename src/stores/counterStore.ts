@@ -1,4 +1,4 @@
-// /src/stores/counterStore.ts
+// src/stores/counterStore.ts
 import { defineStore } from 'pinia';
 
 console.log('counterStore created');

@@ -1,4 +1,4 @@
-// /src/types/routeTypes.ts
+// src/types/routeTypes.ts
 
 export type RouteDefs = {
   [path: string]: RouteDef;
