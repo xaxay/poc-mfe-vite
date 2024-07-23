@@ -2,10 +2,9 @@
 
 console.log('[nav.ts]')
 
-import { RouteLocationNormalizedLoaded, RouteLocationRaw, Router } from 'vue-router';
+import { RouteLocationNormalizedLoaded, RouteLocationRaw, Router, createRouter, createWebHistory } from 'vue-router';
 
 let routerInstanse: Router | null = null;
-
 
 async function loadRouter(): Promise<void> {
   console.log('Started dynamic import of @browser-module/router')
@@ -19,15 +18,19 @@ loadRouter();
 
 export function navigateTo(to: RouteLocationRaw) : void {
   if (!routerInstanse) {
-    throw new Error("router is not loaded yet");
+    throw new Error("main router is not loaded yet");
   }
   routerInstanse.push(to);
 }
 
+const staticRouter = createRouter({
+  history: createWebHistory(),
+  routes: [] // Add your routes here if needed
+});
 
 export function getCurrentRoute() : RouteLocationNormalizedLoaded {
   if (!routerInstanse) {
-    throw new Error("router is not loaded yet");
+    return staticRouter.currentRoute.value;
   }
   return routerInstanse.currentRoute.value;
 }

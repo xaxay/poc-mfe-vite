@@ -2,6 +2,7 @@
 
 <template>
   <v-container fluid>
+    Search:
     <v-text-field 
       v-model="searchQuery" 
       label="Input user name" 

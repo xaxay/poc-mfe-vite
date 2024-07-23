@@ -13,7 +13,7 @@
                 </v-avatar>
               </v-col>
               <v-col>
-                <v-typography variant="h5">{{ userDetails?.name }}</v-typography>
+                {{ userDetails?.name }}
               </v-col>
             </v-row>
           </v-card-title>
@@ -21,7 +21,7 @@
           <v-card-text>
             <v-row>
               <v-col cols="12">
-                <v-typography variant="subtitle1">Permissions:</v-typography>
+                Permissions:
               </v-col>
             </v-row>
             <v-row>

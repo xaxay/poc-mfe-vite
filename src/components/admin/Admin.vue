@@ -2,7 +2,16 @@
 
 <template>
   <v-app>
-    <v-navigation-drawer v-model="drawer" app permanent>
+    <v-app-bar app>
+      <v-app-bar-nav-icon @click="toggleDrawer"></v-app-bar-nav-icon>
+      <v-toolbar-title>Admin Panel</v-toolbar-title>
+    </v-app-bar>
+    <v-navigation-drawer
+      v-model="drawer"
+      app
+      :clipped="isLargeScreen"
+      :permanent="isLargeScreen"
+    >
       <v-list dense>
         <v-list-item
           v-for="(item, index) in items"
@@ -26,7 +35,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, computed } from 'vue';
+import { defineComponent, ref, computed, onMounted, onBeforeUnmount } from 'vue';
 import { createRouteChildren } from './admin-routes';
 import { getUserLogin } from '@browser-module/api/user';
 import { getCurrentRoute } from '@browser-module/api/nav';
@@ -36,6 +45,19 @@ export default defineComponent({
   setup() {
     const drawer = ref(true);
     const userLogin = getUserLogin();
+    const isLargeScreen = ref(window.innerWidth >= 1024);
+
+    const updateScreenSize = () => {
+      isLargeScreen.value = window.innerWidth >= 1024;
+    };
+
+    onMounted(() => {
+      window.addEventListener('resize', updateScreenSize);
+    });
+
+    onBeforeUnmount(() => {
+      window.removeEventListener('resize', updateScreenSize);
+    });
 
     type NavItemDef = {
       title: string,
@@ -69,21 +91,16 @@ export default defineComponent({
       const path = getCurrentRoute().path;
       if (item.exact) {
         if (path === item.path) {
-          // console.log('[active nav-item] #path', item.path, path);
           return true;
         }
         if (!!item.alias && path === item.alias) {
-          // console.log('[active nav-item] #alias', item.alias, path);
           return true;
         }
-        // console.log('[non-active nav-item]', item.path, path);
         return false;
       }
       if (path.startsWith(item.path)) {
-        // console.log('[active nav-item] #startsWith', item.path, path);
         return true;
       }
-      // console.log('[non-active nav-item] #notStartsWith', item.path, path);
       return false;
     }
 
@@ -95,11 +112,17 @@ export default defineComponent({
       return item.title;
     }
 
+    function toggleDrawer() {
+      drawer.value = !drawer.value;
+    }
+
     return {
       drawer,
       items,
       isActive,
       getTitle,
+      toggleDrawer,
+      isLargeScreen,
     };
   },
 });
